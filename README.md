@@ -1,1 +1,1 @@
-# quarto-template
+# Vega-Altair Blog 
