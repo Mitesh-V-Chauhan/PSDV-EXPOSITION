@@ -4,7 +4,7 @@
     "href": "blog.html",
     "title": "Quarto Blog",
     "section": "",
-    "text": "Altair: The interactive data visualization tool\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nWelcome\n\n\n\n\n\nWelcome Post\n\n\n\n\n\nFeb 14, 2025\n\n\nNipun Batra\n\n\n\n\n\n\nNo matching items"
+    "text": "Altair: The interactive data visualization tool\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nNo matching items"
   },
   {
     "objectID": "posts/visualization.html",
@@ -12,13 +12,6 @@
     "title": "Altair: The interactive data visualization tool",
     "section": "",
     "text": "Altair: The interactive data visualization tool\n\nIntroduction\nThe Altair library was released in August 2016 by Jake VanderPlas, Brian Granger, and other contributors from the Jupyter and PyData communities. It is a declarative statistical visualization library for Python, meaning that we don’t need to code how to do something instead we need to just tell what to do, altair will automatically figure out how to do it. Altair library creates beautiful interactive large variety of graphs like simple bar chart, histograms, line plot, scatter plot, to more complex graphs like heatmaps, geographical maps, etc.\nSo, why do we need it? We can use the simply pandas and matplotlib libraries for creating these graphs.\nAltair library makes the graph interactive which we can’t get from the above mentioned libraries or we can get them but it would require to code alot, with features like tooltips, zooming in and out of plots, selections with opacity, color, size (hover effect), dynamic update, also altair allows us to export the file into html files.\n\n\nInstallation & Setup:\nAltair can be simply installed by running the following command on the terminal:\n\nStep 1:\nUsing pip:\npip install altair\nUsing condas\nconda install -c conda-forge altair\n\n\nStep 2:\nInstall a Renderer (For Jupyter, Colab, or VS Code), which is required for displaying charts, plots, etc.\nFor Jupyter Notebook\npip install vega_datasets notebook vega\nimport altair as alt\nalt.renderers.enable(‘notebook’)\nFor VS Code\nimport altair as alt\nalt.renderers.enable(‘mimetype’)\nFor Google Colab\nimport altair as alt\nalt.renderers.enable(‘colab’)"
-  },
-  {
-    "objectID": "posts/welcome.html",
-    "href": "posts/welcome.html",
-    "title": "Welcome",
-    "section": "",
-    "text": "Welcome\nHello world, this is my first blog post.\nI can write in markdown\nprint(\"Hello World\")\nI can also write math equations:\n\\[\ny = x^2\n\\]\nI can create lists easily:\n\nOne\nTwo\n\nI can also create numbered lists:\n\nOne\nTwo\n\nOr, create a table:\n\n\n\nName\nAge\n\n\n\n\nAlice\n20\n\n\nBob\n21"
   },
   {
     "objectID": "index.html",
