@@ -6,10 +6,8 @@
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
-<meta name="author" content="Nipun Batra">
-<meta name="dcterms.date" content="2025-02-14">
 
-<title>Simple Visualisation – Quarto Template</title>
+<title>Altair: The interactive data visualization tool – Quarto Template</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -21,40 +19,6 @@ ul.task-list li input[type="checkbox"] {
   width: 0.8em;
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
-}
-/* CSS for syntax highlighting */
-pre > code.sourceCode { white-space: pre; position: relative; }
-pre > code.sourceCode > span { line-height: 1.25; }
-pre > code.sourceCode > span:empty { height: 1.2em; }
-.sourceCode { overflow: visible; }
-code.sourceCode > span { color: inherit; text-decoration: inherit; }
-div.sourceCode { margin: 1em 0; }
-pre.sourceCode { margin: 0; }
-@media screen {
-div.sourceCode { overflow: auto; }
-}
-@media print {
-pre > code.sourceCode { white-space: pre-wrap; }
-pre > code.sourceCode > span { display: inline-block; text-indent: -5em; padding-left: 5em; }
-}
-pre.numberSource code
-  { counter-reset: source-line 0; }
-pre.numberSource code > span
-  { position: relative; left: -4em; counter-increment: source-line; }
-pre.numberSource code > span > a:first-child::before
-  { content: counter(source-line);
-    position: relative; left: -1em; text-align: right; vertical-align: baseline;
-    border: none; display: inline-block;
-    -webkit-touch-callout: none; -webkit-user-select: none;
-    -khtml-user-select: none; -moz-user-select: none;
-    -ms-user-select: none; user-select: none;
-    padding: 0 4px; width: 4em;
-  }
-pre.numberSource { margin-left: 3em;  padding-left: 4px; }
-div.sourceCode
-  {   }
-@media screen {
-pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
 }
 </style>
 
@@ -106,7 +70,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 </head>
 
-<body class="nav-fixed">
+<body class="nav-fixed fullcontent">
 
 <div id="quarto-search-results"></div>
   <header id="quarto-header" class="headroom fixed-top">
@@ -142,37 +106,20 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
 <!-- sidebar -->
 <!-- margin-sidebar -->
-    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar zindex-bottom">
-        
-    </div>
+    
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title">Simple Visualisation</h1>
-  <div class="quarto-categories">
-    <div class="quarto-category">ML</div>
-  </div>
-  </div>
+<h1 class="title">Altair: The interactive data visualization tool</h1>
+</div>
 
 
 
 <div class="quarto-title-meta">
 
-    <div>
-    <div class="quarto-title-meta-heading">Author</div>
-    <div class="quarto-title-meta-contents">
-             <p>Nipun Batra </p>
-          </div>
-  </div>
     
-    <div>
-    <div class="quarto-title-meta-heading">Published</div>
-    <div class="quarto-title-meta-contents">
-      <p class="date">February 14, 2025</p>
-    </div>
-  </div>
   
     
   </div>
@@ -182,27 +129,39 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </header>
 
 
-<div id="cell-1" class="cell" data-execution_count="1">
-<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
-<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
-<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="op">%</span>matplotlib inline</span>
-<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="op">%</span>config InlineBackend.figure_format <span class="op">=</span> <span class="st">'retina'</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
-<div id="cell-2" class="cell" data-execution_count="2">
-<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>x <span class="op">=</span> np.linspace(<span class="dv">0</span>, <span class="dv">10</span>, <span class="dv">100</span>)</span>
-<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>y <span class="op">=</span> np.sin(x)</span>
-<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>plt.plot(x, y)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-display">
-<div>
-<figure class="figure">
-<p><img src="visualisation_files/figure-html/cell-3-output-1.png" width="568" height="413" class="figure-img"></p>
-</figure>
-</div>
-</div>
-</div>
+<section id="introduction" class="level3">
+<h3 class="anchored" data-anchor-id="introduction"><strong>Introduction</strong></h3>
+<p>The Altair library was released in August 2016 by Jake VanderPlas, Brian Granger, and other contributors from the Jupyter and PyData communities. It is a declarative statistical visualization library for Python, meaning that we don’t need to code how to do something instead we need to just tell what to do, altair will automatically figure out how to do it. Altair library creates beautiful interactive large variety of graphs like simple bar chart, histograms, line plot, scatter plot, to more complex graphs like heatmaps, geographical maps, etc.</p>
+<p><strong>So, why do we need it? We can use the simply pandas and matplotlib libraries for creating these graphs.</strong></p>
+<p>Altair library makes the graph interactive which we can’t get from the above mentioned libraries or we can get them but it would require to code alot, with features like tooltips, zooming in and out of plots, selections with opacity, color, size (hover effect), dynamic update, also altair allows us to export the file into html files.</p>
+</section>
+<section id="installation-setup" class="level3">
+<h3 class="anchored" data-anchor-id="installation-setup"><strong>Installation &amp; Setup:</strong></h3>
+<p>Altair can be simply installed by running the following command on the terminal:</p>
+<section id="step-1" class="level4">
+<h4 class="anchored" data-anchor-id="step-1"><strong>Step 1:</strong></h4>
+<p><strong>Using pip:</strong></p>
+<p>pip install altair</p>
+<p><strong>Using condas</strong></p>
+<p>conda install -c conda-forge altair</p>
+</section>
+<section id="step-2" class="level4">
+<h4 class="anchored" data-anchor-id="step-2"><strong>Step 2:</strong></h4>
+<p>Install a Renderer (For Jupyter, Colab, or VS Code), which is required for displaying charts, plots, etc.</p>
+<p><strong>For Jupyter Notebook</strong></p>
+<p>pip install vega_datasets notebook vega</p>
+<p>import altair as alt</p>
+<p>alt.renderers.enable(‘notebook’)</p>
+<p><strong>For VS Code</strong></p>
+<p>import altair as alt</p>
+<p>alt.renderers.enable(‘mimetype’)</p>
+<p><strong>For Google Colab</strong></p>
+<p>import altair as alt</p>
+<p>alt.renderers.enable(‘colab’)</p>
 
 
+</section>
+</section>
 
 </main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
