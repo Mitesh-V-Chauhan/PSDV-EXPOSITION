@@ -2,12 +2,12 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.6.41">
+<meta name="generator" content="quarto-1.6.42">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>visualization – Vega-Altair Blog</title>
+<title>4. Handling Multiple plots – Vega-Altair Blog</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -57,7 +57,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </style>
 
 
-<script src="../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js" integrity="sha512-bLT0Qm9VnAYZDflyKcBaQ2gg0hSYNQrJ8RilYldYQ1FxQYoCLtUjuuRuZo+fjqhx/qtq/1itJ0C2ejDxltZVFg==" crossorigin="anonymous"></script><script src="../site_libs/quarto-nav/quarto-nav.js"></script>
 <script src="../site_libs/quarto-nav/headroom.min.js"></script>
 <script src="../site_libs/clipboard/clipboard.min.js"></script>
 <script src="../site_libs/quarto-search/autocomplete.umd.js"></script>
@@ -69,10 +69,10 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
 <script src="../site_libs/quarto-html/anchor.min.js"></script>
 <link href="../site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="../site_libs/quarto-html/quarto-syntax-highlighting-49927ad6ac989989b068a441603fbd97.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting-8e00f2f28a1266a720913de837032221.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <script src="../site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="../site_libs/bootstrap/bootstrap-58eff840f6e46f05b7a14c2890f5cff5.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<link href="../site_libs/bootstrap/bootstrap-1fa241595cfea82d48a0932443e8f647.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "navbar",
   "copy-button": false,
@@ -100,6 +100,9 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     "search-label": "Search"
   }
 }</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.6/require.min.js" integrity="sha512-c3Nl8+7g4LMSTdrm621y7kf9v3SDPnhxLNhcjFJbKECVnmZHTdo+IRO05sNLTH/D3vA6u1X32ehoLC7WFVdheg==" crossorigin="anonymous"></script>
+
+<script type="application/javascript">define('jquery', [],function() {return window.jQuery;})</script>
 
 
 </head>
@@ -142,9 +145,25 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <!-- margin-sidebar -->
     
 <!-- main -->
-<main class="content" id="quarto-document-content"><header id="title-block-header" class="quarto-title-block"></header>
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title"><strong>4. Handling Multiple plots</strong></h1>
+</div>
 
 
+
+<div class="quarto-title-meta">
+
+    
+  
+    
+  </div>
+  
+
+
+</header>
 
 
 <section id="altair-the-interactive-data-visualization-tool" class="level1">
@@ -161,11 +180,11 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <section id="step-1" class="level4">
 <h4 class="anchored" data-anchor-id="step-1"><strong>Step 1:</strong></h4>
 <p><strong>Using pip:</strong></p>
-<div id="cell-7" class="cell">
+<div id="cell-8" class="cell">
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="op">!</span> pip install altair </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p><strong>Using condas</strong></p>
-<div id="cell-9" class="cell">
+<div id="cell-10" class="cell">
 <div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="op">!</span> conda install <span class="op">-</span>c conda<span class="op">-</span>forge altair</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
@@ -173,26 +192,675 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <h4 class="anchored" data-anchor-id="step-2"><strong>Step 2:</strong></h4>
 <p>Install a Renderer (For Jupyter, Colab, or VS Code), which is required for displaying charts, plots, etc.</p>
 <p><strong>For Jupyter Notebook</strong></p>
-<div id="cell-13" class="cell">
+<div id="cell-14" class="cell">
 <div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="op">!</span> pip install vega_datasets notebook vega</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<div id="cell-14" class="cell">
+<div id="cell-15" class="cell">
 <div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> altair <span class="im">as</span> alt</span>
 <span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>alt.renderers.enable(<span class="st">'notebook'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p><strong>For VS Code</strong></p>
-<div id="cell-16" class="cell">
+<div id="cell-17" class="cell">
 <div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> altair <span class="im">as</span> alt</span>
 <span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>alt.renderers.enable(<span class="st">'mimetype'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p><strong>For Google Colab</strong></p>
-<div id="cell-18" class="cell">
+<div id="cell-19" class="cell">
 <div class="sourceCode cell-code" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> altair <span class="im">as</span> alt</span>
 <span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>alt.renderers.enable(<span class="st">'colab'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
+</section>
+</section>
+<section id="key-features-explanation-with-code-examples" class="level3">
+<h3 class="anchored" data-anchor-id="key-features-explanation-with-code-examples"><strong>Key Features &amp; Explanation with code examples:</strong></h3>
+<section id="declarative-syntax-and-conciseness" class="level5">
+<h5 class="anchored" data-anchor-id="declarative-syntax-and-conciseness"><strong>1. Declarative Syntax and Conciseness</strong></h5>
+<p>Altair allows us to write the code in declarative manner, that is we need to specify only what we want and not how we want, altair will figure it out at it’s own end. Also altair allows us to write the code in fewer lines due to its declarative syntax property.</p>
+<div id="cell-23" class="cell" data-execution_count="9">
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> altair <span class="im">as</span> alt</span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
+<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a>df <span class="op">=</span> pd.DataFrame({</span>
+<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a>    <span class="st">'Name'</span>: [<span class="st">'Ford'</span>, <span class="st">'Toyota'</span>, <span class="st">'BMW'</span>, <span class="st">'Honda'</span>, <span class="st">'Chevy'</span>],</span>
+<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a>    <span class="st">'Horsepower'</span>: [<span class="dv">150</span>, <span class="dv">120</span>, <span class="dv">200</span>, <span class="dv">130</span>, <span class="dv">180</span>],</span>
+<span id="cb7-7"><a href="#cb7-7" aria-hidden="true" tabindex="-1"></a>    <span class="st">'MPG'</span>: [<span class="dv">20</span>, <span class="dv">35</span>, <span class="dv">25</span>, <span class="dv">32</span>, <span class="dv">22</span>],</span>
+<span id="cb7-8"><a href="#cb7-8" aria-hidden="true" tabindex="-1"></a>    <span class="st">'Origin'</span>: [<span class="st">'USA'</span>, <span class="st">'Japan'</span>, <span class="st">'Europe'</span>, <span class="st">'Japan'</span>, <span class="st">'USA'</span>]</span>
+<span id="cb7-9"><a href="#cb7-9" aria-hidden="true" tabindex="-1"></a>})</span>
+<span id="cb7-10"><a href="#cb7-10" aria-hidden="true" tabindex="-1"></a>df</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="9">
+<div>
+
+
+<table class="dataframe caption-top table table-sm table-striped small" data-quarto-postprocess="true" data-border="1">
+<thead>
+<tr class="header">
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th">Name</th>
+<th data-quarto-table-cell-role="th">Horsepower</th>
+<th data-quarto-table-cell-role="th">MPG</th>
+<th data-quarto-table-cell-role="th">Origin</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">0</td>
+<td>Ford</td>
+<td>150</td>
+<td>20</td>
+<td>USA</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">1</td>
+<td>Toyota</td>
+<td>120</td>
+<td>35</td>
+<td>Japan</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">2</td>
+<td>BMW</td>
+<td>200</td>
+<td>25</td>
+<td>Europe</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">3</td>
+<td>Honda</td>
+<td>130</td>
+<td>32</td>
+<td>Japan</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">4</td>
+<td>Chevy</td>
+<td>180</td>
+<td>22</td>
+<td>USA</td>
+</tr>
+</tbody>
+</table>
+
+</div>
+</div>
+</div>
+<p>Using Matplotlib:</p>
+<div id="cell-25" class="cell" data-execution_count="7">
+<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>plt.bar(df[<span class="st">'Name'</span>], df[<span class="st">'Horsepower'</span>])</span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>plt.title(<span class="st">'Horsepower of Car'</span>)</span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>plt.xlabel(<span class="st">'Name'</span>)</span>
+<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a>plt.ylabel(<span class="st">'Horsepower'</span>)</span>
+<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a>plt.xticks(rotation<span class="op">=</span><span class="dv">45</span>)</span>
+<span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="visualization_files/figure-html/cell-9-output-1.png" class="img-fluid figure-img"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>Using altair:</p>
+<div id="cell-27" class="cell" data-execution_count="8">
+<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>chart <span class="op">=</span> alt.Chart(df).mark_bar().encode(</span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>    x<span class="op">=</span><span class="st">'Name'</span>, y<span class="op">=</span><span class="st">'Horsepower'</span></span>
+<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a>).properties(title<span class="op">=</span><span class="st">'Horsepower of Car'</span>)</span>
+<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a>chart</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="8">
+
+<style>
+  #altair-viz-a0e12ff231594574a75a1632f0b1ebf5.vega-embed {
+    width: 100%;
+    display: flex;
+  }
+
+  #altair-viz-a0e12ff231594574a75a1632f0b1ebf5.vega-embed details,
+  #altair-viz-a0e12ff231594574a75a1632f0b1ebf5.vega-embed details summary {
+    position: relative;
+  }
+</style>
+<div id="altair-viz-a0e12ff231594574a75a1632f0b1ebf5"></div>
+<script type="text/javascript">
+  var VEGA_DEBUG = (typeof VEGA_DEBUG == "undefined") ? {} : VEGA_DEBUG;
+  (function(spec, embedOpt){
+    let outputDiv = document.currentScript.previousElementSibling;
+    if (outputDiv.id !== "altair-viz-a0e12ff231594574a75a1632f0b1ebf5") {
+      outputDiv = document.getElementById("altair-viz-a0e12ff231594574a75a1632f0b1ebf5");
+    }
+
+    const paths = {
+      "vega": "https://cdn.jsdelivr.net/npm/vega@5?noext",
+      "vega-lib": "https://cdn.jsdelivr.net/npm/vega-lib?noext",
+      "vega-lite": "https://cdn.jsdelivr.net/npm/vega-lite@5.20.1?noext",
+      "vega-embed": "https://cdn.jsdelivr.net/npm/vega-embed@6?noext",
+    };
+
+    function maybeLoadScript(lib, version) {
+      var key = `${lib.replace("-", "")}_version`;
+      return (VEGA_DEBUG[key] == version) ?
+        Promise.resolve(paths[lib]) :
+        new Promise(function(resolve, reject) {
+          var s = document.createElement('script');
+          document.getElementsByTagName("head")[0].appendChild(s);
+          s.async = true;
+          s.onload = () => {
+            VEGA_DEBUG[key] = version;
+            return resolve(paths[lib]);
+          };
+          s.onerror = () => reject(`Error loading script: ${paths[lib]}`);
+          s.src = paths[lib];
+        });
+    }
+
+    function showError(err) {
+      outputDiv.innerHTML = `<div class="error" style="color:red;">${err}</div>`;
+      throw err;
+    }
+
+    function displayChart(vegaEmbed) {
+      vegaEmbed(outputDiv, spec, embedOpt)
+        .catch(err => showError(`Javascript Error: ${err.message}<br>This usually means there's a typo in your chart specification. See the javascript console for the full traceback.`));
+    }
+
+    if(typeof define === "function" && define.amd) {
+      requirejs.config({paths});
+      let deps = ["vega-embed"];
+      require(deps, displayChart, err => showError(`Error loading script: ${err.message}`));
+    } else {
+      maybeLoadScript("vega", "5")
+        .then(() => maybeLoadScript("vega-lite", "5.20.1"))
+        .then(() => maybeLoadScript("vega-embed", "6"))
+        .catch(showError)
+        .then(() => displayChart(vegaEmbed));
+    }
+  })({"config": {"view": {"continuousWidth": 300, "continuousHeight": 300}}, "data": {"name": "data-d33ad5e98d0a7d68a90e8187308f21e0"}, "mark": {"type": "bar"}, "encoding": {"x": {"field": "Name", "type": "nominal"}, "y": {"field": "Horsepower", "type": "quantitative"}}, "title": "Horsepower of Car", "$schema": "https://vega.github.io/schema/vega-lite/v5.20.1.json", "datasets": {"data-d33ad5e98d0a7d68a90e8187308f21e0": [{"Name": "Ford", "Horsepower": 150, "MPG": 20, "Origin": "USA"}, {"Name": "Toyota", "Horsepower": 120, "MPG": 35, "Origin": "Japan"}, {"Name": "BMW", "Horsepower": 200, "MPG": 25, "Origin": "Europe"}, {"Name": "Honda", "Horsepower": 130, "MPG": 32, "Origin": "Japan"}, {"Name": "Chevy", "Horsepower": 180, "MPG": 22, "Origin": "USA"}]}}, {"mode": "vega-lite"});
+</script>
+</div>
+</div>
+</section>
+<section id="interactivity-with-graphs" class="level5">
+<h5 class="anchored" data-anchor-id="interactivity-with-graphs"><strong>2. Interactivity with graphs</strong></h5>
+<p>Altair library makes the graph interactive-</p>
+<ul>
+<li>When we add the .interactive() parameter enabling us to zoom in and out of the graph and drag also.</li>
+<li>We can add brush with opacity to be able to highlight a particular section</li>
+<li>Use tooltips</li>
+</ul>
+<div id="cell-30" class="cell" data-execution_count="23">
+<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"</span><span class="ch">\t</span><span class="st">Tooltip"</span>)</span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> IPython.display <span class="im">import</span> Image, display</span>
+<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a>display(Image(filename<span class="op">=</span><span class="st">"1.jpg"</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>    Tooltip</code></pre>
+</div>
+<div class="cell-output cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="visualization_files/figure-html/cell-11-output-2.jpeg" class="img-fluid figure-img"></p>
+</figure>
+</div>
+</div>
+</div>
+<div id="cell-31" class="cell" data-execution_count="25">
+<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"</span><span class="ch">\t</span><span class="st">Highlighting a specific section"</span>)</span>
+<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> IPython.display <span class="im">import</span> Image, display</span>
+<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a>display(Image(filename<span class="op">=</span><span class="st">"2.jpg"</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>    Highlighting a specific section</code></pre>
+</div>
+<div class="cell-output cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="visualization_files/figure-html/cell-12-output-2.jpeg" class="img-fluid figure-img"></p>
+</figure>
+</div>
+</div>
+</div>
+</section>
+<section id="data-aggregation" class="level5">
+<h5 class="anchored" data-anchor-id="data-aggregation"><strong>3. Data aggregation</strong></h5>
+<p>In altair we need not process the data before, that is we don’t need to create a groupby object beforehand. But in matplotlib we first have to select the specific data using aggregation.</p>
+<p>Matplotlib</p>
+<div id="cell-35" class="cell" data-execution_count="28">
+<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a>avgmpg <span class="op">=</span> df.groupby(<span class="st">'Origin'</span>)[<span class="st">'MPG'</span>].mean()</span>
+<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a>plt.bar(avgmpg.index, avgmpg.values, color<span class="op">=</span>[<span class="st">'blue'</span>, <span class="st">'green'</span>, <span class="st">'red'</span>])</span>
+<span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a>plt.title(<span class="st">'Average MPG by Origin'</span>)</span>
+<span id="cb14-4"><a href="#cb14-4" aria-hidden="true" tabindex="-1"></a>plt.xlabel(<span class="st">'Origin'</span>)</span>
+<span id="cb14-5"><a href="#cb14-5" aria-hidden="true" tabindex="-1"></a>plt.ylabel(<span class="st">'Average MPG'</span>)</span>
+<span id="cb14-6"><a href="#cb14-6" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="visualization_files/figure-html/cell-13-output-1.png" class="img-fluid figure-img"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>Altair</p>
+<div id="cell-37" class="cell" data-execution_count="31">
+<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a>chart <span class="op">=</span> alt.Chart(df).mark_bar().encode(</span>
+<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a>    x<span class="op">=</span><span class="st">'Origin'</span>, y<span class="op">=</span>alt.Y(<span class="st">'mean(MPG)'</span>),</span>
+<span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a>    color<span class="op">=</span><span class="st">'Origin'</span></span>
+<span id="cb15-4"><a href="#cb15-4" aria-hidden="true" tabindex="-1"></a>).properties(title<span class="op">=</span><span class="st">'Average MPG by Origin'</span>)</span>
+<span id="cb15-5"><a href="#cb15-5" aria-hidden="true" tabindex="-1"></a>chart</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="31">
+
+<style>
+  #altair-viz-20f7d108a3534d66b4fe0f42bb61be0b.vega-embed {
+    width: 100%;
+    display: flex;
+  }
+
+  #altair-viz-20f7d108a3534d66b4fe0f42bb61be0b.vega-embed details,
+  #altair-viz-20f7d108a3534d66b4fe0f42bb61be0b.vega-embed details summary {
+    position: relative;
+  }
+</style>
+<div id="altair-viz-20f7d108a3534d66b4fe0f42bb61be0b"></div>
+<script type="text/javascript">
+  var VEGA_DEBUG = (typeof VEGA_DEBUG == "undefined") ? {} : VEGA_DEBUG;
+  (function(spec, embedOpt){
+    let outputDiv = document.currentScript.previousElementSibling;
+    if (outputDiv.id !== "altair-viz-20f7d108a3534d66b4fe0f42bb61be0b") {
+      outputDiv = document.getElementById("altair-viz-20f7d108a3534d66b4fe0f42bb61be0b");
+    }
+
+    const paths = {
+      "vega": "https://cdn.jsdelivr.net/npm/vega@5?noext",
+      "vega-lib": "https://cdn.jsdelivr.net/npm/vega-lib?noext",
+      "vega-lite": "https://cdn.jsdelivr.net/npm/vega-lite@5.20.1?noext",
+      "vega-embed": "https://cdn.jsdelivr.net/npm/vega-embed@6?noext",
+    };
+
+    function maybeLoadScript(lib, version) {
+      var key = `${lib.replace("-", "")}_version`;
+      return (VEGA_DEBUG[key] == version) ?
+        Promise.resolve(paths[lib]) :
+        new Promise(function(resolve, reject) {
+          var s = document.createElement('script');
+          document.getElementsByTagName("head")[0].appendChild(s);
+          s.async = true;
+          s.onload = () => {
+            VEGA_DEBUG[key] = version;
+            return resolve(paths[lib]);
+          };
+          s.onerror = () => reject(`Error loading script: ${paths[lib]}`);
+          s.src = paths[lib];
+        });
+    }
+
+    function showError(err) {
+      outputDiv.innerHTML = `<div class="error" style="color:red;">${err}</div>`;
+      throw err;
+    }
+
+    function displayChart(vegaEmbed) {
+      vegaEmbed(outputDiv, spec, embedOpt)
+        .catch(err => showError(`Javascript Error: ${err.message}<br>This usually means there's a typo in your chart specification. See the javascript console for the full traceback.`));
+    }
+
+    if(typeof define === "function" && define.amd) {
+      requirejs.config({paths});
+      let deps = ["vega-embed"];
+      require(deps, displayChart, err => showError(`Error loading script: ${err.message}`));
+    } else {
+      maybeLoadScript("vega", "5")
+        .then(() => maybeLoadScript("vega-lite", "5.20.1"))
+        .then(() => maybeLoadScript("vega-embed", "6"))
+        .catch(showError)
+        .then(() => displayChart(vegaEmbed));
+    }
+  })({"config": {"view": {"continuousWidth": 300, "continuousHeight": 300}}, "data": {"name": "data-d33ad5e98d0a7d68a90e8187308f21e0"}, "mark": {"type": "bar"}, "encoding": {"color": {"field": "Origin", "type": "nominal"}, "x": {"field": "Origin", "type": "nominal"}, "y": {"aggregate": "mean", "field": "MPG", "type": "quantitative"}}, "title": "Average MPG by Origin", "$schema": "https://vega.github.io/schema/vega-lite/v5.20.1.json", "datasets": {"data-d33ad5e98d0a7d68a90e8187308f21e0": [{"Name": "Ford", "Horsepower": 150, "MPG": 20, "Origin": "USA"}, {"Name": "Toyota", "Horsepower": 120, "MPG": 35, "Origin": "Japan"}, {"Name": "BMW", "Horsepower": 200, "MPG": 25, "Origin": "Europe"}, {"Name": "Honda", "Horsepower": 130, "MPG": 32, "Origin": "Japan"}, {"Name": "Chevy", "Horsepower": 180, "MPG": 22, "Origin": "USA"}]}}, {"mode": "vega-lite"});
+</script>
+</div>
+</div>
+<p>Altair allows us to plot multiple plots easily. It allows us to plot more than one parameters in a single plot just by using + operator, plot two graphs horizontally(side by side) by using “|” operator and vertically by using “&amp;” operator, which is much more simpler than in matplotlib.</p>
+<p>Matplotlib</p>
+<div id="cell-41" class="cell" data-execution_count="76">
+<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
+<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
+<span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> altair <span class="im">as</span> alt</span>
+<span id="cb16-4"><a href="#cb16-4" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
+<span id="cb16-5"><a href="#cb16-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-6"><a href="#cb16-6" aria-hidden="true" tabindex="-1"></a>x_values <span class="op">=</span> np.linspace(<span class="dv">0</span>, <span class="dv">5</span>, <span class="dv">100</span>)  </span>
+<span id="cb16-7"><a href="#cb16-7" aria-hidden="true" tabindex="-1"></a>data <span class="op">=</span> pd.DataFrame({</span>
+<span id="cb16-8"><a href="#cb16-8" aria-hidden="true" tabindex="-1"></a>    <span class="st">'x'</span>: x_values,</span>
+<span id="cb16-9"><a href="#cb16-9" aria-hidden="true" tabindex="-1"></a>    <span class="st">'y_x2'</span>: x_values<span class="op">**</span><span class="dv">2</span>,      </span>
+<span id="cb16-10"><a href="#cb16-10" aria-hidden="true" tabindex="-1"></a>    <span class="st">'y_sqrt'</span>: np.sqrt(x_values)  </span>
+<span id="cb16-11"><a href="#cb16-11" aria-hidden="true" tabindex="-1"></a>})</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p><strong>Ploting multiple graphs on same plot</strong></p>
+<p>Matplotlib</p>
+<div id="cell-44" class="cell" data-execution_count="62">
+<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a>plt.figure(figsize<span class="op">=</span>(<span class="dv">8</span>, <span class="dv">4</span>))</span>
+<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a>plt.plot(data[<span class="st">'x'</span>], data[<span class="st">'y_x2'</span>], <span class="st">'r-'</span>, label<span class="op">=</span><span class="st">'y = x^2'</span>)</span>
+<span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a>plt.plot(data[<span class="st">'x'</span>], data[<span class="st">'y_sqrt'</span>], <span class="st">'b'</span>, label<span class="op">=</span><span class="st">'y = sqrt(x)'</span>)</span>
+<span id="cb17-4"><a href="#cb17-4" aria-hidden="true" tabindex="-1"></a>plt.title(<span class="st">' y = x^2 and y = sqrt(x)'</span>)</span>
+<span id="cb17-5"><a href="#cb17-5" aria-hidden="true" tabindex="-1"></a>plt.xlabel(<span class="st">'x'</span>)</span>
+<span id="cb17-6"><a href="#cb17-6" aria-hidden="true" tabindex="-1"></a>plt.ylabel(<span class="st">'y'</span>)</span>
+<span id="cb17-7"><a href="#cb17-7" aria-hidden="true" tabindex="-1"></a>plt.legend()</span>
+<span id="cb17-8"><a href="#cb17-8" aria-hidden="true" tabindex="-1"></a>plt.grid(<span class="va">True</span>)</span>
+<span id="cb17-9"><a href="#cb17-9" aria-hidden="true" tabindex="-1"></a>plt.tight_layout()</span>
+<span id="cb17-10"><a href="#cb17-10" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="visualization_files/figure-html/cell-16-output-1.png" class="img-fluid figure-img"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>Altair</p>
+<div id="cell-46" class="cell" data-execution_count="64">
+<div class="sourceCode cell-code" id="cb18"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a>x2 <span class="op">=</span> alt.Chart(data).mark_line(color<span class="op">=</span><span class="st">'red'</span>).encode(</span>
+<span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a>    x<span class="op">=</span><span class="st">'x'</span>, y<span class="op">=</span><span class="st">'y_x2'</span></span>
+<span id="cb18-3"><a href="#cb18-3" aria-hidden="true" tabindex="-1"></a>    ).properties(width<span class="op">=</span><span class="dv">300</span>, height<span class="op">=</span><span class="dv">200</span>)</span>
+<span id="cb18-4"><a href="#cb18-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-5"><a href="#cb18-5" aria-hidden="true" tabindex="-1"></a>sqrt <span class="op">=</span> alt.Chart(data).mark_line(color<span class="op">=</span><span class="st">'blue'</span>).encode(</span>
+<span id="cb18-6"><a href="#cb18-6" aria-hidden="true" tabindex="-1"></a>    x<span class="op">=</span><span class="st">'x'</span>, y<span class="op">=</span><span class="st">'y_sqrt'</span></span>
+<span id="cb18-7"><a href="#cb18-7" aria-hidden="true" tabindex="-1"></a>    ).properties(width<span class="op">=</span><span class="dv">300</span>, height<span class="op">=</span><span class="dv">200</span>)</span>
+<span id="cb18-8"><a href="#cb18-8" aria-hidden="true" tabindex="-1"></a>(x2 <span class="op">+</span> sqrt).properties(title<span class="op">=</span><span class="st">'y = x^2 and y = sqrt(x)'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="64">
+
+<style>
+  #altair-viz-af86e92125f14cfd8e7dc1333cb361f4.vega-embed {
+    width: 100%;
+    display: flex;
+  }
+
+  #altair-viz-af86e92125f14cfd8e7dc1333cb361f4.vega-embed details,
+  #altair-viz-af86e92125f14cfd8e7dc1333cb361f4.vega-embed details summary {
+    position: relative;
+  }
+</style>
+<div id="altair-viz-af86e92125f14cfd8e7dc1333cb361f4"></div>
+<script type="text/javascript">
+  var VEGA_DEBUG = (typeof VEGA_DEBUG == "undefined") ? {} : VEGA_DEBUG;
+  (function(spec, embedOpt){
+    let outputDiv = document.currentScript.previousElementSibling;
+    if (outputDiv.id !== "altair-viz-af86e92125f14cfd8e7dc1333cb361f4") {
+      outputDiv = document.getElementById("altair-viz-af86e92125f14cfd8e7dc1333cb361f4");
+    }
+
+    const paths = {
+      "vega": "https://cdn.jsdelivr.net/npm/vega@5?noext",
+      "vega-lib": "https://cdn.jsdelivr.net/npm/vega-lib?noext",
+      "vega-lite": "https://cdn.jsdelivr.net/npm/vega-lite@5.20.1?noext",
+      "vega-embed": "https://cdn.jsdelivr.net/npm/vega-embed@6?noext",
+    };
+
+    function maybeLoadScript(lib, version) {
+      var key = `${lib.replace("-", "")}_version`;
+      return (VEGA_DEBUG[key] == version) ?
+        Promise.resolve(paths[lib]) :
+        new Promise(function(resolve, reject) {
+          var s = document.createElement('script');
+          document.getElementsByTagName("head")[0].appendChild(s);
+          s.async = true;
+          s.onload = () => {
+            VEGA_DEBUG[key] = version;
+            return resolve(paths[lib]);
+          };
+          s.onerror = () => reject(`Error loading script: ${paths[lib]}`);
+          s.src = paths[lib];
+        });
+    }
+
+    function showError(err) {
+      outputDiv.innerHTML = `<div class="error" style="color:red;">${err}</div>`;
+      throw err;
+    }
+
+    function displayChart(vegaEmbed) {
+      vegaEmbed(outputDiv, spec, embedOpt)
+        .catch(err => showError(`Javascript Error: ${err.message}<br>This usually means there's a typo in your chart specification. See the javascript console for the full traceback.`));
+    }
+
+    if(typeof define === "function" && define.amd) {
+      requirejs.config({paths});
+      let deps = ["vega-embed"];
+      require(deps, displayChart, err => showError(`Error loading script: ${err.message}`));
+    } else {
+      maybeLoadScript("vega", "5")
+        .then(() => maybeLoadScript("vega-lite", "5.20.1"))
+        .then(() => maybeLoadScript("vega-embed", "6"))
+        .catch(showError)
+        .then(() => displayChart(vegaEmbed));
+    }
+  })({"config": {"view": {"continuousWidth": 300, "continuousHeight": 300}}, "layer": [{"mark": {"type": "line", "color": "red"}, "encoding": {"x": {"field": "x", "type": "quantitative"}, "y": {"field": "y_x2", "type": "quantitative"}}}, {"mark": {"type": "line", "color": "blue"}, "encoding": {"x": {"field": "x", "type": "quantitative"}, "y": {"field": "y_sqrt", "type": "quantitative"}}}], "data": {"name": "data-6d9f0b0ac3ff1abf99f429165a80159c"}, "height": 200, "title": "y = x^2 and y = sqrt(x)", "width": 300, "$schema": "https://vega.github.io/schema/vega-lite/v5.20.1.json", "datasets": {"data-6d9f0b0ac3ff1abf99f429165a80159c": [{"x": 0.0, "y_x2": 0.0, "y_sqrt": 0.0}, {"x": 0.050505050505050504, "y_x2": 0.002550760126517702, "y_sqrt": 0.22473328748774735}, {"x": 0.10101010101010101, "y_x2": 0.010203040506070809, "y_sqrt": 0.3178208630818641}, {"x": 0.15151515151515152, "y_x2": 0.022956841138659322, "y_sqrt": 0.3892494720807615}, {"x": 0.20202020202020202, "y_x2": 0.040812162024283234, "y_sqrt": 0.4494665749754947}, {"x": 0.25252525252525254, "y_x2": 0.06376900316294257, "y_sqrt": 0.502518907629606}, {"x": 0.30303030303030304, "y_x2": 0.09182736455463729, "y_sqrt": 0.5504818825631803}, {"x": 0.35353535353535354, "y_x2": 0.12498724619936741, "y_sqrt": 0.5945883900105632}, {"x": 0.40404040404040403, "y_x2": 0.16324864809713294, "y_sqrt": 0.6356417261637282}, {"x": 0.45454545454545453, "y_x2": 0.20661157024793386, "y_sqrt": 0.674199862463242}, {"x": 0.5050505050505051, "y_x2": 0.25507601265177027, "y_sqrt": 0.7106690545187014}, {"x": 0.5555555555555556, "y_x2": 0.308641975308642, "y_sqrt": 0.7453559924999299}, {"x": 0.6060606060606061, "y_x2": 0.36730945821854916, "y_sqrt": 0.778498944161523}, {"x": 0.6565656565656566, "y_x2": 0.4310784613814917, "y_sqrt": 0.8102873913406629}, {"x": 0.7070707070707071, "y_x2": 0.49994898479746963, "y_sqrt": 0.8408749651825217}, {"x": 0.7575757575757576, "y_x2": 0.573921028466483, "y_sqrt": 0.8703882797784892}, {"x": 0.8080808080808081, "y_x2": 0.6529945923885317, "y_sqrt": 0.8989331499509894}, {"x": 0.8585858585858586, "y_x2": 0.7371696765636159, "y_sqrt": 0.9265990819042822}, {"x": 0.9090909090909091, "y_x2": 0.8264462809917354, "y_sqrt": 0.9534625892455924}, {"x": 0.9595959595959596, "y_x2": 0.9208244056728905, "y_sqrt": 0.9795896894087645}, {"x": 1.0101010101010102, "y_x2": 1.020304050607081, "y_sqrt": 1.005037815259212}, {"x": 1.0606060606060606, "y_x2": 1.1248852157943066, "y_sqrt": 1.0298573010888745}, {"x": 1.1111111111111112, "y_x2": 1.234567901234568, "y_sqrt": 1.0540925533894598}, {"x": 1.1616161616161615, "y_x2": 1.3493521069278644, "y_sqrt": 1.0777829844714388}, {"x": 1.2121212121212122, "y_x2": 1.4692378328741966, "y_sqrt": 1.1009637651263606}, {"x": 1.2626262626262625, "y_x2": 1.5942250790735637, "y_sqrt": 1.1236664374387368}, {"x": 1.3131313131313131, "y_x2": 1.7243138455259668, "y_sqrt": 1.145919418253881}, {"x": 1.3636363636363635, "y_x2": 1.8595041322314048, "y_sqrt": 1.1677484162422844}, {"x": 1.4141414141414141, "y_x2": 1.9997959391898785, "y_sqrt": 1.1891767800211264}, {"x": 1.4646464646464645, "y_x2": 2.1451892664013874, "y_sqrt": 1.210225790770658}, {"x": 1.5151515151515151, "y_x2": 2.295684113865932, "y_sqrt": 1.2309149097933274}, {"x": 1.5656565656565655, "y_x2": 2.4512804815835114, "y_sqrt": 1.2512619892159138}, {"x": 1.6161616161616161, "y_x2": 2.611978369554127, "y_sqrt": 1.2712834523274563}, {"x": 1.6666666666666667, "y_x2": 2.777777777777778, "y_sqrt": 1.2909944487358056}, {"x": 1.7171717171717171, "y_x2": 2.9486787062544635, "y_sqrt": 1.310408988511494}, {"x": 1.7676767676767677, "y_x2": 3.1246811549841853, "y_sqrt": 1.3295400586957762}, {"x": 1.8181818181818181, "y_x2": 3.305785123966942, "y_sqrt": 1.348399724926484}, {"x": 1.8686868686868687, "y_x2": 3.4919906132027347, "y_sqrt": 1.3669992204412074}, {"x": 1.9191919191919191, "y_x2": 3.683297622691562, "y_sqrt": 1.3853490243227224}, {"x": 1.9696969696969697, "y_x2": 3.879706152433425, "y_sqrt": 1.403458930534474}, {"x": 2.0202020202020203, "y_x2": 4.081216202428324, "y_sqrt": 1.4213381090374029}, {"x": 2.0707070707070705, "y_x2": 4.287827772676256, "y_sqrt": 1.4389951600707593}, {"x": 2.121212121212121, "y_x2": 4.499540863177226, "y_sqrt": 1.4564381625088383}, {"x": 2.1717171717171717, "y_x2": 4.716355473931231, "y_sqrt": 1.4736747170651914}, {"x": 2.2222222222222223, "y_x2": 4.938271604938272, "y_sqrt": 1.4907119849998598}, {"x": 2.2727272727272725, "y_x2": 5.165289256198346, "y_sqrt": 1.507556722888818}, {"x": 2.323232323232323, "y_x2": 5.397408427711458, "y_sqrt": 1.5242153139344596}, {"x": 2.3737373737373737, "y_x2": 5.634629119477604, "y_sqrt": 1.5406937962286256}, {"x": 2.4242424242424243, "y_x2": 5.8769513314967865, "y_sqrt": 1.556997888323046}, {"x": 2.474747474747475, "y_x2": 6.124375063769004, "y_sqrt": 1.5731330124142315}, {"x": 2.525252525252525, "y_x2": 6.376900316294255, "y_sqrt": 1.5891043154093205}, {"x": 2.5757575757575757, "y_x2": 6.634527089072543, "y_sqrt": 1.6049166881048922}, {"x": 2.6262626262626263, "y_x2": 6.897255382103867, "y_sqrt": 1.6205747826813257}, {"x": 2.676767676767677, "y_x2": 7.165085195388227, "y_sqrt": 1.6360830286900714}, {"x": 2.727272727272727, "y_x2": 7.438016528925619, "y_sqrt": 1.651445647689541}, {"x": 2.7777777777777777, "y_x2": 7.716049382716049, "y_sqrt": 1.6666666666666667}, {"x": 2.8282828282828283, "y_x2": 7.999183756759514, "y_sqrt": 1.6817499303650434}, {"x": 2.878787878787879, "y_x2": 8.287419651056016, "y_sqrt": 1.6966991126265962}, {"x": 2.929292929292929, "y_x2": 8.58075706560555, "y_sqrt": 1.7115177268415682}, {"x": 2.9797979797979797, "y_x2": 8.87919600040812, "y_sqrt": 1.726209135591044}, {"x": 3.0303030303030303, "y_x2": 9.182736455463727, "y_sqrt": 1.7407765595569784}, {"x": 3.080808080808081, "y_x2": 9.49137843077237, "y_sqrt": 1.7552230857666158}, {"x": 3.131313131313131, "y_x2": 9.805121926334046, "y_sqrt": 1.7695516752310827}, {"x": 3.1818181818181817, "y_x2": 10.12396694214876, "y_sqrt": 1.7837651700316894}, {"x": 3.2323232323232323, "y_x2": 10.447913478216508, "y_sqrt": 1.7978662999019788}, {"x": 3.282828282828283, "y_x2": 10.776961534537293, "y_sqrt": 1.8118576883486968}, {"x": 3.3333333333333335, "y_x2": 11.111111111111112, "y_sqrt": 1.8257418583505538}, {"x": 3.3838383838383836, "y_x2": 11.450362207937964, "y_sqrt": 1.839521237669841}, {"x": 3.4343434343434343, "y_x2": 11.794714825017854, "y_sqrt": 1.8531981638085644}, {"x": 3.484848484848485, "y_x2": 12.144168962350781, "y_sqrt": 1.8667748886377502}, {"x": 3.5353535353535355, "y_x2": 12.498724619936741, "y_sqrt": 1.8802535827258875}, {"x": 3.5858585858585856, "y_x2": 12.858381797775735, "y_sqrt": 1.8936363393900597}, {"x": 3.6363636363636362, "y_x2": 13.223140495867767, "y_sqrt": 1.9069251784911847}, {"x": 3.686868686868687, "y_x2": 13.593000714212835, "y_sqrt": 1.9201220499928349}, {"x": 3.7373737373737375, "y_x2": 13.967962452810939, "y_sqrt": 1.9332288373014037}, {"x": 3.7878787878787876, "y_x2": 14.348025711662073, "y_sqrt": 1.9462473604038073}, {"x": 3.8383838383838382, "y_x2": 14.733190490766248, "y_sqrt": 1.959179378817529}, {"x": 3.888888888888889, "y_x2": 15.123456790123456, "y_sqrt": 1.9720265943665387}, {"x": 3.9393939393939394, "y_x2": 15.5188246097337, "y_sqrt": 1.9847906537954927}, {"x": 3.9898989898989896, "y_x2": 15.919293949596977, "y_sqrt": 1.9974731512335753}, {"x": 4.040404040404041, "y_x2": 16.324864809713297, "y_sqrt": 2.010075630518424}, {"x": 4.090909090909091, "y_x2": 16.735537190082646, "y_sqrt": 2.0225995873897262}, {"x": 4.141414141414141, "y_x2": 17.151311090705025, "y_sqrt": 2.035046471561311}, {"x": 4.191919191919192, "y_x2": 17.57218651158045, "y_sqrt": 2.0474176886798627}, {"x": 4.242424242424242, "y_x2": 17.998163452708905, "y_sqrt": 2.059714602177749}, {"x": 4.292929292929293, "y_x2": 18.4292419140904, "y_sqrt": 2.07193853502687}, {"x": 4.343434343434343, "y_x2": 18.865421895724925, "y_sqrt": 2.0840907713999273}, {"x": 4.393939393939394, "y_x2": 19.306703397612484, "y_sqrt": 2.0961725582450015}, {"x": 4.444444444444445, "y_x2": 19.75308641975309, "y_sqrt": 2.1081851067789197}, {"x": 4.494949494949495, "y_x2": 20.204570962146718, "y_sqrt": 2.120129593904461}, {"x": 4.545454545454545, "y_x2": 20.661157024793383, "y_sqrt": 2.1320071635561044}, {"x": 4.595959595959596, "y_x2": 21.122844607693093, "y_sqrt": 2.143818927978666}, {"x": 4.646464646464646, "y_x2": 21.58963371084583, "y_sqrt": 2.1555659689428777}, {"x": 4.696969696969697, "y_x2": 22.061524334251608, "y_sqrt": 2.1672493389016636}, {"x": 4.747474747474747, "y_x2": 22.538516477910417, "y_sqrt": 2.178870062090612}, {"x": 4.797979797979798, "y_x2": 23.02061014182226, "y_sqrt": 2.190429135575903}, {"x": 4.848484848484849, "y_x2": 23.507805325987146, "y_sqrt": 2.2019275302527213}, {"x": 4.898989898989899, "y_x2": 24.00010203040506, "y_sqrt": 2.2133661917969873}, {"x": 4.94949494949495, "y_x2": 24.497500255076016, "y_sqrt": 2.2247460415730487}, {"x": 5.0, "y_x2": 25.0, "y_sqrt": 2.23606797749979}]}}, {"mode": "vega-lite"});
+</script>
+</div>
+</div>
+<p><strong>Ploting graphs side by side</strong></p>
+<p>Matplotlib</p>
+<div id="cell-49" class="cell" data-execution_count="67">
+<div class="sourceCode cell-code" id="cb19"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a>fig, (ax1, ax2) <span class="op">=</span> plt.subplots(<span class="dv">1</span>, <span class="dv">2</span>, figsize<span class="op">=</span>(<span class="dv">10</span>, <span class="dv">4</span>))</span>
+<span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a>ax1.plot(data[<span class="st">'x'</span>], data[<span class="st">'y_x2'</span>], <span class="st">'r'</span>, label<span class="op">=</span><span class="st">'y = x^2'</span>)</span>
+<span id="cb19-3"><a href="#cb19-3" aria-hidden="true" tabindex="-1"></a>ax1.set_title(<span class="st">'y = x^2'</span>)</span>
+<span id="cb19-4"><a href="#cb19-4" aria-hidden="true" tabindex="-1"></a>ax1.set_xlabel(<span class="st">'x'</span>)</span>
+<span id="cb19-5"><a href="#cb19-5" aria-hidden="true" tabindex="-1"></a>ax1.set_ylabel(<span class="st">'y'</span>)</span>
+<span id="cb19-6"><a href="#cb19-6" aria-hidden="true" tabindex="-1"></a>ax1.legend()</span>
+<span id="cb19-7"><a href="#cb19-7" aria-hidden="true" tabindex="-1"></a>ax1.grid(<span class="va">True</span>)</span>
+<span id="cb19-8"><a href="#cb19-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb19-9"><a href="#cb19-9" aria-hidden="true" tabindex="-1"></a>ax2.plot(data[<span class="st">'x'</span>], data[<span class="st">'y_sqrt'</span>], <span class="st">'b'</span>, label<span class="op">=</span><span class="st">'y = sqrt(x)'</span>)</span>
+<span id="cb19-10"><a href="#cb19-10" aria-hidden="true" tabindex="-1"></a>ax2.set_title(<span class="st">'y = sqrt(x)'</span>)</span>
+<span id="cb19-11"><a href="#cb19-11" aria-hidden="true" tabindex="-1"></a>ax2.set_xlabel(<span class="st">'x'</span>)</span>
+<span id="cb19-12"><a href="#cb19-12" aria-hidden="true" tabindex="-1"></a>ax2.set_ylabel(<span class="st">'y'</span>)</span>
+<span id="cb19-13"><a href="#cb19-13" aria-hidden="true" tabindex="-1"></a>ax2.legend()</span>
+<span id="cb19-14"><a href="#cb19-14" aria-hidden="true" tabindex="-1"></a>ax2.grid(<span class="va">True</span>)</span>
+<span id="cb19-15"><a href="#cb19-15" aria-hidden="true" tabindex="-1"></a>plt.tight_layout()</span>
+<span id="cb19-16"><a href="#cb19-16" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="visualization_files/figure-html/cell-18-output-1.png" class="img-fluid figure-img"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>Altair</p>
+<div id="cell-51" class="cell" data-execution_count="70">
+<div class="sourceCode cell-code" id="cb20"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a>x2 <span class="op">=</span> alt.Chart(data).mark_line(color<span class="op">=</span><span class="st">'red'</span>).encode(</span>
+<span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a>    x<span class="op">=</span><span class="st">'x'</span>, y<span class="op">=</span><span class="st">'y_x2'</span></span>
+<span id="cb20-3"><a href="#cb20-3" aria-hidden="true" tabindex="-1"></a>).properties(width<span class="op">=</span><span class="dv">200</span>, height<span class="op">=</span><span class="dv">200</span>, title<span class="op">=</span><span class="st">'y = x^2'</span>)</span>
+<span id="cb20-4"><a href="#cb20-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-5"><a href="#cb20-5" aria-hidden="true" tabindex="-1"></a>sqrt <span class="op">=</span> alt.Chart(data).mark_line(color<span class="op">=</span><span class="st">'blue'</span>).encode(</span>
+<span id="cb20-6"><a href="#cb20-6" aria-hidden="true" tabindex="-1"></a>    x<span class="op">=</span><span class="st">'x'</span>,</span>
+<span id="cb20-7"><a href="#cb20-7" aria-hidden="true" tabindex="-1"></a>    y<span class="op">=</span><span class="st">'y_sqrt'</span></span>
+<span id="cb20-8"><a href="#cb20-8" aria-hidden="true" tabindex="-1"></a>).properties(width<span class="op">=</span><span class="dv">200</span>, height<span class="op">=</span><span class="dv">200</span>, title<span class="op">=</span><span class="st">'y = sqrt(x)'</span>)</span>
+<span id="cb20-9"><a href="#cb20-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-10"><a href="#cb20-10" aria-hidden="true" tabindex="-1"></a>x2 <span class="op">|</span> sqrt</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="70">
+
+<style>
+  #altair-viz-d8fe567b8b2e4a54a05946eb1eb9e2a6.vega-embed {
+    width: 100%;
+    display: flex;
+  }
+
+  #altair-viz-d8fe567b8b2e4a54a05946eb1eb9e2a6.vega-embed details,
+  #altair-viz-d8fe567b8b2e4a54a05946eb1eb9e2a6.vega-embed details summary {
+    position: relative;
+  }
+</style>
+<div id="altair-viz-d8fe567b8b2e4a54a05946eb1eb9e2a6"></div>
+<script type="text/javascript">
+  var VEGA_DEBUG = (typeof VEGA_DEBUG == "undefined") ? {} : VEGA_DEBUG;
+  (function(spec, embedOpt){
+    let outputDiv = document.currentScript.previousElementSibling;
+    if (outputDiv.id !== "altair-viz-d8fe567b8b2e4a54a05946eb1eb9e2a6") {
+      outputDiv = document.getElementById("altair-viz-d8fe567b8b2e4a54a05946eb1eb9e2a6");
+    }
+
+    const paths = {
+      "vega": "https://cdn.jsdelivr.net/npm/vega@5?noext",
+      "vega-lib": "https://cdn.jsdelivr.net/npm/vega-lib?noext",
+      "vega-lite": "https://cdn.jsdelivr.net/npm/vega-lite@5.20.1?noext",
+      "vega-embed": "https://cdn.jsdelivr.net/npm/vega-embed@6?noext",
+    };
+
+    function maybeLoadScript(lib, version) {
+      var key = `${lib.replace("-", "")}_version`;
+      return (VEGA_DEBUG[key] == version) ?
+        Promise.resolve(paths[lib]) :
+        new Promise(function(resolve, reject) {
+          var s = document.createElement('script');
+          document.getElementsByTagName("head")[0].appendChild(s);
+          s.async = true;
+          s.onload = () => {
+            VEGA_DEBUG[key] = version;
+            return resolve(paths[lib]);
+          };
+          s.onerror = () => reject(`Error loading script: ${paths[lib]}`);
+          s.src = paths[lib];
+        });
+    }
+
+    function showError(err) {
+      outputDiv.innerHTML = `<div class="error" style="color:red;">${err}</div>`;
+      throw err;
+    }
+
+    function displayChart(vegaEmbed) {
+      vegaEmbed(outputDiv, spec, embedOpt)
+        .catch(err => showError(`Javascript Error: ${err.message}<br>This usually means there's a typo in your chart specification. See the javascript console for the full traceback.`));
+    }
+
+    if(typeof define === "function" && define.amd) {
+      requirejs.config({paths});
+      let deps = ["vega-embed"];
+      require(deps, displayChart, err => showError(`Error loading script: ${err.message}`));
+    } else {
+      maybeLoadScript("vega", "5")
+        .then(() => maybeLoadScript("vega-lite", "5.20.1"))
+        .then(() => maybeLoadScript("vega-embed", "6"))
+        .catch(showError)
+        .then(() => displayChart(vegaEmbed));
+    }
+  })({"config": {"view": {"continuousWidth": 300, "continuousHeight": 300}}, "hconcat": [{"mark": {"type": "line", "color": "red"}, "encoding": {"x": {"field": "x", "type": "quantitative"}, "y": {"field": "y_x2", "type": "quantitative"}}, "height": 200, "title": "y = x^2", "width": 200}, {"mark": {"type": "line", "color": "blue"}, "encoding": {"x": {"field": "x", "type": "quantitative"}, "y": {"field": "y_sqrt", "type": "quantitative"}}, "height": 200, "title": "y = sqrt(x)", "width": 200}], "data": {"name": "data-6d9f0b0ac3ff1abf99f429165a80159c"}, "$schema": "https://vega.github.io/schema/vega-lite/v5.20.1.json", "datasets": {"data-6d9f0b0ac3ff1abf99f429165a80159c": [{"x": 0.0, "y_x2": 0.0, "y_sqrt": 0.0}, {"x": 0.050505050505050504, "y_x2": 0.002550760126517702, "y_sqrt": 0.22473328748774735}, {"x": 0.10101010101010101, "y_x2": 0.010203040506070809, "y_sqrt": 0.3178208630818641}, {"x": 0.15151515151515152, "y_x2": 0.022956841138659322, "y_sqrt": 0.3892494720807615}, {"x": 0.20202020202020202, "y_x2": 0.040812162024283234, "y_sqrt": 0.4494665749754947}, {"x": 0.25252525252525254, "y_x2": 0.06376900316294257, "y_sqrt": 0.502518907629606}, {"x": 0.30303030303030304, "y_x2": 0.09182736455463729, "y_sqrt": 0.5504818825631803}, {"x": 0.35353535353535354, "y_x2": 0.12498724619936741, "y_sqrt": 0.5945883900105632}, {"x": 0.40404040404040403, "y_x2": 0.16324864809713294, "y_sqrt": 0.6356417261637282}, {"x": 0.45454545454545453, "y_x2": 0.20661157024793386, "y_sqrt": 0.674199862463242}, {"x": 0.5050505050505051, "y_x2": 0.25507601265177027, "y_sqrt": 0.7106690545187014}, {"x": 0.5555555555555556, "y_x2": 0.308641975308642, "y_sqrt": 0.7453559924999299}, {"x": 0.6060606060606061, "y_x2": 0.36730945821854916, "y_sqrt": 0.778498944161523}, {"x": 0.6565656565656566, "y_x2": 0.4310784613814917, "y_sqrt": 0.8102873913406629}, {"x": 0.7070707070707071, "y_x2": 0.49994898479746963, "y_sqrt": 0.8408749651825217}, {"x": 0.7575757575757576, "y_x2": 0.573921028466483, "y_sqrt": 0.8703882797784892}, {"x": 0.8080808080808081, "y_x2": 0.6529945923885317, "y_sqrt": 0.8989331499509894}, {"x": 0.8585858585858586, "y_x2": 0.7371696765636159, "y_sqrt": 0.9265990819042822}, {"x": 0.9090909090909091, "y_x2": 0.8264462809917354, "y_sqrt": 0.9534625892455924}, {"x": 0.9595959595959596, "y_x2": 0.9208244056728905, "y_sqrt": 0.9795896894087645}, {"x": 1.0101010101010102, "y_x2": 1.020304050607081, "y_sqrt": 1.005037815259212}, {"x": 1.0606060606060606, "y_x2": 1.1248852157943066, "y_sqrt": 1.0298573010888745}, {"x": 1.1111111111111112, "y_x2": 1.234567901234568, "y_sqrt": 1.0540925533894598}, {"x": 1.1616161616161615, "y_x2": 1.3493521069278644, "y_sqrt": 1.0777829844714388}, {"x": 1.2121212121212122, "y_x2": 1.4692378328741966, "y_sqrt": 1.1009637651263606}, {"x": 1.2626262626262625, "y_x2": 1.5942250790735637, "y_sqrt": 1.1236664374387368}, {"x": 1.3131313131313131, "y_x2": 1.7243138455259668, "y_sqrt": 1.145919418253881}, {"x": 1.3636363636363635, "y_x2": 1.8595041322314048, "y_sqrt": 1.1677484162422844}, {"x": 1.4141414141414141, "y_x2": 1.9997959391898785, "y_sqrt": 1.1891767800211264}, {"x": 1.4646464646464645, "y_x2": 2.1451892664013874, "y_sqrt": 1.210225790770658}, {"x": 1.5151515151515151, "y_x2": 2.295684113865932, "y_sqrt": 1.2309149097933274}, {"x": 1.5656565656565655, "y_x2": 2.4512804815835114, "y_sqrt": 1.2512619892159138}, {"x": 1.6161616161616161, "y_x2": 2.611978369554127, "y_sqrt": 1.2712834523274563}, {"x": 1.6666666666666667, "y_x2": 2.777777777777778, "y_sqrt": 1.2909944487358056}, {"x": 1.7171717171717171, "y_x2": 2.9486787062544635, "y_sqrt": 1.310408988511494}, {"x": 1.7676767676767677, "y_x2": 3.1246811549841853, "y_sqrt": 1.3295400586957762}, {"x": 1.8181818181818181, "y_x2": 3.305785123966942, "y_sqrt": 1.348399724926484}, {"x": 1.8686868686868687, "y_x2": 3.4919906132027347, "y_sqrt": 1.3669992204412074}, {"x": 1.9191919191919191, "y_x2": 3.683297622691562, "y_sqrt": 1.3853490243227224}, {"x": 1.9696969696969697, "y_x2": 3.879706152433425, "y_sqrt": 1.403458930534474}, {"x": 2.0202020202020203, "y_x2": 4.081216202428324, "y_sqrt": 1.4213381090374029}, {"x": 2.0707070707070705, "y_x2": 4.287827772676256, "y_sqrt": 1.4389951600707593}, {"x": 2.121212121212121, "y_x2": 4.499540863177226, "y_sqrt": 1.4564381625088383}, {"x": 2.1717171717171717, "y_x2": 4.716355473931231, "y_sqrt": 1.4736747170651914}, {"x": 2.2222222222222223, "y_x2": 4.938271604938272, "y_sqrt": 1.4907119849998598}, {"x": 2.2727272727272725, "y_x2": 5.165289256198346, "y_sqrt": 1.507556722888818}, {"x": 2.323232323232323, "y_x2": 5.397408427711458, "y_sqrt": 1.5242153139344596}, {"x": 2.3737373737373737, "y_x2": 5.634629119477604, "y_sqrt": 1.5406937962286256}, {"x": 2.4242424242424243, "y_x2": 5.8769513314967865, "y_sqrt": 1.556997888323046}, {"x": 2.474747474747475, "y_x2": 6.124375063769004, "y_sqrt": 1.5731330124142315}, {"x": 2.525252525252525, "y_x2": 6.376900316294255, "y_sqrt": 1.5891043154093205}, {"x": 2.5757575757575757, "y_x2": 6.634527089072543, "y_sqrt": 1.6049166881048922}, {"x": 2.6262626262626263, "y_x2": 6.897255382103867, "y_sqrt": 1.6205747826813257}, {"x": 2.676767676767677, "y_x2": 7.165085195388227, "y_sqrt": 1.6360830286900714}, {"x": 2.727272727272727, "y_x2": 7.438016528925619, "y_sqrt": 1.651445647689541}, {"x": 2.7777777777777777, "y_x2": 7.716049382716049, "y_sqrt": 1.6666666666666667}, {"x": 2.8282828282828283, "y_x2": 7.999183756759514, "y_sqrt": 1.6817499303650434}, {"x": 2.878787878787879, "y_x2": 8.287419651056016, "y_sqrt": 1.6966991126265962}, {"x": 2.929292929292929, "y_x2": 8.58075706560555, "y_sqrt": 1.7115177268415682}, {"x": 2.9797979797979797, "y_x2": 8.87919600040812, "y_sqrt": 1.726209135591044}, {"x": 3.0303030303030303, "y_x2": 9.182736455463727, "y_sqrt": 1.7407765595569784}, {"x": 3.080808080808081, "y_x2": 9.49137843077237, "y_sqrt": 1.7552230857666158}, {"x": 3.131313131313131, "y_x2": 9.805121926334046, "y_sqrt": 1.7695516752310827}, {"x": 3.1818181818181817, "y_x2": 10.12396694214876, "y_sqrt": 1.7837651700316894}, {"x": 3.2323232323232323, "y_x2": 10.447913478216508, "y_sqrt": 1.7978662999019788}, {"x": 3.282828282828283, "y_x2": 10.776961534537293, "y_sqrt": 1.8118576883486968}, {"x": 3.3333333333333335, "y_x2": 11.111111111111112, "y_sqrt": 1.8257418583505538}, {"x": 3.3838383838383836, "y_x2": 11.450362207937964, "y_sqrt": 1.839521237669841}, {"x": 3.4343434343434343, "y_x2": 11.794714825017854, "y_sqrt": 1.8531981638085644}, {"x": 3.484848484848485, "y_x2": 12.144168962350781, "y_sqrt": 1.8667748886377502}, {"x": 3.5353535353535355, "y_x2": 12.498724619936741, "y_sqrt": 1.8802535827258875}, {"x": 3.5858585858585856, "y_x2": 12.858381797775735, "y_sqrt": 1.8936363393900597}, {"x": 3.6363636363636362, "y_x2": 13.223140495867767, "y_sqrt": 1.9069251784911847}, {"x": 3.686868686868687, "y_x2": 13.593000714212835, "y_sqrt": 1.9201220499928349}, {"x": 3.7373737373737375, "y_x2": 13.967962452810939, "y_sqrt": 1.9332288373014037}, {"x": 3.7878787878787876, "y_x2": 14.348025711662073, "y_sqrt": 1.9462473604038073}, {"x": 3.8383838383838382, "y_x2": 14.733190490766248, "y_sqrt": 1.959179378817529}, {"x": 3.888888888888889, "y_x2": 15.123456790123456, "y_sqrt": 1.9720265943665387}, {"x": 3.9393939393939394, "y_x2": 15.5188246097337, "y_sqrt": 1.9847906537954927}, {"x": 3.9898989898989896, "y_x2": 15.919293949596977, "y_sqrt": 1.9974731512335753}, {"x": 4.040404040404041, "y_x2": 16.324864809713297, "y_sqrt": 2.010075630518424}, {"x": 4.090909090909091, "y_x2": 16.735537190082646, "y_sqrt": 2.0225995873897262}, {"x": 4.141414141414141, "y_x2": 17.151311090705025, "y_sqrt": 2.035046471561311}, {"x": 4.191919191919192, "y_x2": 17.57218651158045, "y_sqrt": 2.0474176886798627}, {"x": 4.242424242424242, "y_x2": 17.998163452708905, "y_sqrt": 2.059714602177749}, {"x": 4.292929292929293, "y_x2": 18.4292419140904, "y_sqrt": 2.07193853502687}, {"x": 4.343434343434343, "y_x2": 18.865421895724925, "y_sqrt": 2.0840907713999273}, {"x": 4.393939393939394, "y_x2": 19.306703397612484, "y_sqrt": 2.0961725582450015}, {"x": 4.444444444444445, "y_x2": 19.75308641975309, "y_sqrt": 2.1081851067789197}, {"x": 4.494949494949495, "y_x2": 20.204570962146718, "y_sqrt": 2.120129593904461}, {"x": 4.545454545454545, "y_x2": 20.661157024793383, "y_sqrt": 2.1320071635561044}, {"x": 4.595959595959596, "y_x2": 21.122844607693093, "y_sqrt": 2.143818927978666}, {"x": 4.646464646464646, "y_x2": 21.58963371084583, "y_sqrt": 2.1555659689428777}, {"x": 4.696969696969697, "y_x2": 22.061524334251608, "y_sqrt": 2.1672493389016636}, {"x": 4.747474747474747, "y_x2": 22.538516477910417, "y_sqrt": 2.178870062090612}, {"x": 4.797979797979798, "y_x2": 23.02061014182226, "y_sqrt": 2.190429135575903}, {"x": 4.848484848484849, "y_x2": 23.507805325987146, "y_sqrt": 2.2019275302527213}, {"x": 4.898989898989899, "y_x2": 24.00010203040506, "y_sqrt": 2.2133661917969873}, {"x": 4.94949494949495, "y_x2": 24.497500255076016, "y_sqrt": 2.2247460415730487}, {"x": 5.0, "y_x2": 25.0, "y_sqrt": 2.23606797749979}]}}, {"mode": "vega-lite"});
+</script>
+</div>
+</div>
+<p><strong>Ploting graphs one above other</strong></p>
+<p>Matplotlib</p>
+<div id="cell-54" class="cell" data-execution_count="73">
+<div class="sourceCode cell-code" id="cb21"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a>fig, (ax1, ax2) <span class="op">=</span> plt.subplots(<span class="dv">2</span>, <span class="dv">1</span>, figsize<span class="op">=</span>(<span class="dv">6</span>, <span class="dv">6</span>))</span>
+<span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a>ax1.plot(data[<span class="st">'x'</span>], data[<span class="st">'y_x2'</span>], <span class="st">'r-'</span>, label<span class="op">=</span><span class="st">'y = x^2'</span>)</span>
+<span id="cb21-3"><a href="#cb21-3" aria-hidden="true" tabindex="-1"></a>ax1.set_title(<span class="st">'y = x^2'</span>)</span>
+<span id="cb21-4"><a href="#cb21-4" aria-hidden="true" tabindex="-1"></a>ax1.set_xlabel(<span class="st">'x'</span>)</span>
+<span id="cb21-5"><a href="#cb21-5" aria-hidden="true" tabindex="-1"></a>ax1.set_ylabel(<span class="st">'y'</span>)</span>
+<span id="cb21-6"><a href="#cb21-6" aria-hidden="true" tabindex="-1"></a>ax1.legend()</span>
+<span id="cb21-7"><a href="#cb21-7" aria-hidden="true" tabindex="-1"></a>ax1.grid(<span class="va">True</span>)</span>
+<span id="cb21-8"><a href="#cb21-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb21-9"><a href="#cb21-9" aria-hidden="true" tabindex="-1"></a>ax2.plot(data[<span class="st">'x'</span>], data[<span class="st">'y_sqrt'</span>], <span class="st">'b-'</span>, label<span class="op">=</span><span class="st">'y = sqrt(x)'</span>)</span>
+<span id="cb21-10"><a href="#cb21-10" aria-hidden="true" tabindex="-1"></a>ax2.set_title(<span class="st">'y = sqrt(x)'</span>)</span>
+<span id="cb21-11"><a href="#cb21-11" aria-hidden="true" tabindex="-1"></a>ax2.set_xlabel(<span class="st">'x'</span>)</span>
+<span id="cb21-12"><a href="#cb21-12" aria-hidden="true" tabindex="-1"></a>ax2.set_ylabel(<span class="st">'y'</span>)</span>
+<span id="cb21-13"><a href="#cb21-13" aria-hidden="true" tabindex="-1"></a>ax2.legend()</span>
+<span id="cb21-14"><a href="#cb21-14" aria-hidden="true" tabindex="-1"></a>ax2.grid(<span class="va">True</span>)</span>
+<span id="cb21-15"><a href="#cb21-15" aria-hidden="true" tabindex="-1"></a>plt.tight_layout()</span>
+<span id="cb21-16"><a href="#cb21-16" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="visualization_files/figure-html/cell-20-output-1.png" class="img-fluid figure-img"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>Altair</p>
+<div id="cell-56" class="cell" data-execution_count="75">
+<div class="sourceCode cell-code" id="cb22"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a>x2 <span class="op">=</span> alt.Chart(data).mark_line(color<span class="op">=</span><span class="st">'red'</span>).encode(</span>
+<span id="cb22-2"><a href="#cb22-2" aria-hidden="true" tabindex="-1"></a>    x<span class="op">=</span><span class="st">'x'</span>, y<span class="op">=</span><span class="st">'y_x2'</span></span>
+<span id="cb22-3"><a href="#cb22-3" aria-hidden="true" tabindex="-1"></a>).properties(width<span class="op">=</span><span class="dv">300</span>, height<span class="op">=</span><span class="dv">150</span>, title<span class="op">=</span><span class="st">'y = x^2'</span>)</span>
+<span id="cb22-4"><a href="#cb22-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-5"><a href="#cb22-5" aria-hidden="true" tabindex="-1"></a>sqrt <span class="op">=</span> alt.Chart(data).mark_line(color<span class="op">=</span><span class="st">'blue'</span>).encode(</span>
+<span id="cb22-6"><a href="#cb22-6" aria-hidden="true" tabindex="-1"></a>    x<span class="op">=</span><span class="st">'x'</span>, y<span class="op">=</span><span class="st">'y_sqrt'</span></span>
+<span id="cb22-7"><a href="#cb22-7" aria-hidden="true" tabindex="-1"></a>).properties(width<span class="op">=</span><span class="dv">300</span>, height<span class="op">=</span><span class="dv">150</span>, title<span class="op">=</span><span class="st">'y = sqrt(x)'</span>)</span>
+<span id="cb22-8"><a href="#cb22-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-9"><a href="#cb22-9" aria-hidden="true" tabindex="-1"></a>x2 <span class="op">&amp;</span> sqrt</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="75">
+
+<style>
+  #altair-viz-397cea97288144169b2e69ef4a7b8704.vega-embed {
+    width: 100%;
+    display: flex;
+  }
+
+  #altair-viz-397cea97288144169b2e69ef4a7b8704.vega-embed details,
+  #altair-viz-397cea97288144169b2e69ef4a7b8704.vega-embed details summary {
+    position: relative;
+  }
+</style>
+<div id="altair-viz-397cea97288144169b2e69ef4a7b8704"></div>
+<script type="text/javascript">
+  var VEGA_DEBUG = (typeof VEGA_DEBUG == "undefined") ? {} : VEGA_DEBUG;
+  (function(spec, embedOpt){
+    let outputDiv = document.currentScript.previousElementSibling;
+    if (outputDiv.id !== "altair-viz-397cea97288144169b2e69ef4a7b8704") {
+      outputDiv = document.getElementById("altair-viz-397cea97288144169b2e69ef4a7b8704");
+    }
+
+    const paths = {
+      "vega": "https://cdn.jsdelivr.net/npm/vega@5?noext",
+      "vega-lib": "https://cdn.jsdelivr.net/npm/vega-lib?noext",
+      "vega-lite": "https://cdn.jsdelivr.net/npm/vega-lite@5.20.1?noext",
+      "vega-embed": "https://cdn.jsdelivr.net/npm/vega-embed@6?noext",
+    };
+
+    function maybeLoadScript(lib, version) {
+      var key = `${lib.replace("-", "")}_version`;
+      return (VEGA_DEBUG[key] == version) ?
+        Promise.resolve(paths[lib]) :
+        new Promise(function(resolve, reject) {
+          var s = document.createElement('script');
+          document.getElementsByTagName("head")[0].appendChild(s);
+          s.async = true;
+          s.onload = () => {
+            VEGA_DEBUG[key] = version;
+            return resolve(paths[lib]);
+          };
+          s.onerror = () => reject(`Error loading script: ${paths[lib]}`);
+          s.src = paths[lib];
+        });
+    }
+
+    function showError(err) {
+      outputDiv.innerHTML = `<div class="error" style="color:red;">${err}</div>`;
+      throw err;
+    }
+
+    function displayChart(vegaEmbed) {
+      vegaEmbed(outputDiv, spec, embedOpt)
+        .catch(err => showError(`Javascript Error: ${err.message}<br>This usually means there's a typo in your chart specification. See the javascript console for the full traceback.`));
+    }
+
+    if(typeof define === "function" && define.amd) {
+      requirejs.config({paths});
+      let deps = ["vega-embed"];
+      require(deps, displayChart, err => showError(`Error loading script: ${err.message}`));
+    } else {
+      maybeLoadScript("vega", "5")
+        .then(() => maybeLoadScript("vega-lite", "5.20.1"))
+        .then(() => maybeLoadScript("vega-embed", "6"))
+        .catch(showError)
+        .then(() => displayChart(vegaEmbed));
+    }
+  })({"config": {"view": {"continuousWidth": 300, "continuousHeight": 300}}, "vconcat": [{"mark": {"type": "line", "color": "red"}, "encoding": {"x": {"field": "x", "type": "quantitative"}, "y": {"field": "y_x2", "type": "quantitative"}}, "height": 150, "title": "y = x^2", "width": 300}, {"mark": {"type": "line", "color": "blue"}, "encoding": {"x": {"field": "x", "type": "quantitative"}, "y": {"field": "y_sqrt", "type": "quantitative"}}, "height": 150, "title": "y = sqrt(x)", "width": 300}], "data": {"name": "data-6d9f0b0ac3ff1abf99f429165a80159c"}, "$schema": "https://vega.github.io/schema/vega-lite/v5.20.1.json", "datasets": {"data-6d9f0b0ac3ff1abf99f429165a80159c": [{"x": 0.0, "y_x2": 0.0, "y_sqrt": 0.0}, {"x": 0.050505050505050504, "y_x2": 0.002550760126517702, "y_sqrt": 0.22473328748774735}, {"x": 0.10101010101010101, "y_x2": 0.010203040506070809, "y_sqrt": 0.3178208630818641}, {"x": 0.15151515151515152, "y_x2": 0.022956841138659322, "y_sqrt": 0.3892494720807615}, {"x": 0.20202020202020202, "y_x2": 0.040812162024283234, "y_sqrt": 0.4494665749754947}, {"x": 0.25252525252525254, "y_x2": 0.06376900316294257, "y_sqrt": 0.502518907629606}, {"x": 0.30303030303030304, "y_x2": 0.09182736455463729, "y_sqrt": 0.5504818825631803}, {"x": 0.35353535353535354, "y_x2": 0.12498724619936741, "y_sqrt": 0.5945883900105632}, {"x": 0.40404040404040403, "y_x2": 0.16324864809713294, "y_sqrt": 0.6356417261637282}, {"x": 0.45454545454545453, "y_x2": 0.20661157024793386, "y_sqrt": 0.674199862463242}, {"x": 0.5050505050505051, "y_x2": 0.25507601265177027, "y_sqrt": 0.7106690545187014}, {"x": 0.5555555555555556, "y_x2": 0.308641975308642, "y_sqrt": 0.7453559924999299}, {"x": 0.6060606060606061, "y_x2": 0.36730945821854916, "y_sqrt": 0.778498944161523}, {"x": 0.6565656565656566, "y_x2": 0.4310784613814917, "y_sqrt": 0.8102873913406629}, {"x": 0.7070707070707071, "y_x2": 0.49994898479746963, "y_sqrt": 0.8408749651825217}, {"x": 0.7575757575757576, "y_x2": 0.573921028466483, "y_sqrt": 0.8703882797784892}, {"x": 0.8080808080808081, "y_x2": 0.6529945923885317, "y_sqrt": 0.8989331499509894}, {"x": 0.8585858585858586, "y_x2": 0.7371696765636159, "y_sqrt": 0.9265990819042822}, {"x": 0.9090909090909091, "y_x2": 0.8264462809917354, "y_sqrt": 0.9534625892455924}, {"x": 0.9595959595959596, "y_x2": 0.9208244056728905, "y_sqrt": 0.9795896894087645}, {"x": 1.0101010101010102, "y_x2": 1.020304050607081, "y_sqrt": 1.005037815259212}, {"x": 1.0606060606060606, "y_x2": 1.1248852157943066, "y_sqrt": 1.0298573010888745}, {"x": 1.1111111111111112, "y_x2": 1.234567901234568, "y_sqrt": 1.0540925533894598}, {"x": 1.1616161616161615, "y_x2": 1.3493521069278644, "y_sqrt": 1.0777829844714388}, {"x": 1.2121212121212122, "y_x2": 1.4692378328741966, "y_sqrt": 1.1009637651263606}, {"x": 1.2626262626262625, "y_x2": 1.5942250790735637, "y_sqrt": 1.1236664374387368}, {"x": 1.3131313131313131, "y_x2": 1.7243138455259668, "y_sqrt": 1.145919418253881}, {"x": 1.3636363636363635, "y_x2": 1.8595041322314048, "y_sqrt": 1.1677484162422844}, {"x": 1.4141414141414141, "y_x2": 1.9997959391898785, "y_sqrt": 1.1891767800211264}, {"x": 1.4646464646464645, "y_x2": 2.1451892664013874, "y_sqrt": 1.210225790770658}, {"x": 1.5151515151515151, "y_x2": 2.295684113865932, "y_sqrt": 1.2309149097933274}, {"x": 1.5656565656565655, "y_x2": 2.4512804815835114, "y_sqrt": 1.2512619892159138}, {"x": 1.6161616161616161, "y_x2": 2.611978369554127, "y_sqrt": 1.2712834523274563}, {"x": 1.6666666666666667, "y_x2": 2.777777777777778, "y_sqrt": 1.2909944487358056}, {"x": 1.7171717171717171, "y_x2": 2.9486787062544635, "y_sqrt": 1.310408988511494}, {"x": 1.7676767676767677, "y_x2": 3.1246811549841853, "y_sqrt": 1.3295400586957762}, {"x": 1.8181818181818181, "y_x2": 3.305785123966942, "y_sqrt": 1.348399724926484}, {"x": 1.8686868686868687, "y_x2": 3.4919906132027347, "y_sqrt": 1.3669992204412074}, {"x": 1.9191919191919191, "y_x2": 3.683297622691562, "y_sqrt": 1.3853490243227224}, {"x": 1.9696969696969697, "y_x2": 3.879706152433425, "y_sqrt": 1.403458930534474}, {"x": 2.0202020202020203, "y_x2": 4.081216202428324, "y_sqrt": 1.4213381090374029}, {"x": 2.0707070707070705, "y_x2": 4.287827772676256, "y_sqrt": 1.4389951600707593}, {"x": 2.121212121212121, "y_x2": 4.499540863177226, "y_sqrt": 1.4564381625088383}, {"x": 2.1717171717171717, "y_x2": 4.716355473931231, "y_sqrt": 1.4736747170651914}, {"x": 2.2222222222222223, "y_x2": 4.938271604938272, "y_sqrt": 1.4907119849998598}, {"x": 2.2727272727272725, "y_x2": 5.165289256198346, "y_sqrt": 1.507556722888818}, {"x": 2.323232323232323, "y_x2": 5.397408427711458, "y_sqrt": 1.5242153139344596}, {"x": 2.3737373737373737, "y_x2": 5.634629119477604, "y_sqrt": 1.5406937962286256}, {"x": 2.4242424242424243, "y_x2": 5.8769513314967865, "y_sqrt": 1.556997888323046}, {"x": 2.474747474747475, "y_x2": 6.124375063769004, "y_sqrt": 1.5731330124142315}, {"x": 2.525252525252525, "y_x2": 6.376900316294255, "y_sqrt": 1.5891043154093205}, {"x": 2.5757575757575757, "y_x2": 6.634527089072543, "y_sqrt": 1.6049166881048922}, {"x": 2.6262626262626263, "y_x2": 6.897255382103867, "y_sqrt": 1.6205747826813257}, {"x": 2.676767676767677, "y_x2": 7.165085195388227, "y_sqrt": 1.6360830286900714}, {"x": 2.727272727272727, "y_x2": 7.438016528925619, "y_sqrt": 1.651445647689541}, {"x": 2.7777777777777777, "y_x2": 7.716049382716049, "y_sqrt": 1.6666666666666667}, {"x": 2.8282828282828283, "y_x2": 7.999183756759514, "y_sqrt": 1.6817499303650434}, {"x": 2.878787878787879, "y_x2": 8.287419651056016, "y_sqrt": 1.6966991126265962}, {"x": 2.929292929292929, "y_x2": 8.58075706560555, "y_sqrt": 1.7115177268415682}, {"x": 2.9797979797979797, "y_x2": 8.87919600040812, "y_sqrt": 1.726209135591044}, {"x": 3.0303030303030303, "y_x2": 9.182736455463727, "y_sqrt": 1.7407765595569784}, {"x": 3.080808080808081, "y_x2": 9.49137843077237, "y_sqrt": 1.7552230857666158}, {"x": 3.131313131313131, "y_x2": 9.805121926334046, "y_sqrt": 1.7695516752310827}, {"x": 3.1818181818181817, "y_x2": 10.12396694214876, "y_sqrt": 1.7837651700316894}, {"x": 3.2323232323232323, "y_x2": 10.447913478216508, "y_sqrt": 1.7978662999019788}, {"x": 3.282828282828283, "y_x2": 10.776961534537293, "y_sqrt": 1.8118576883486968}, {"x": 3.3333333333333335, "y_x2": 11.111111111111112, "y_sqrt": 1.8257418583505538}, {"x": 3.3838383838383836, "y_x2": 11.450362207937964, "y_sqrt": 1.839521237669841}, {"x": 3.4343434343434343, "y_x2": 11.794714825017854, "y_sqrt": 1.8531981638085644}, {"x": 3.484848484848485, "y_x2": 12.144168962350781, "y_sqrt": 1.8667748886377502}, {"x": 3.5353535353535355, "y_x2": 12.498724619936741, "y_sqrt": 1.8802535827258875}, {"x": 3.5858585858585856, "y_x2": 12.858381797775735, "y_sqrt": 1.8936363393900597}, {"x": 3.6363636363636362, "y_x2": 13.223140495867767, "y_sqrt": 1.9069251784911847}, {"x": 3.686868686868687, "y_x2": 13.593000714212835, "y_sqrt": 1.9201220499928349}, {"x": 3.7373737373737375, "y_x2": 13.967962452810939, "y_sqrt": 1.9332288373014037}, {"x": 3.7878787878787876, "y_x2": 14.348025711662073, "y_sqrt": 1.9462473604038073}, {"x": 3.8383838383838382, "y_x2": 14.733190490766248, "y_sqrt": 1.959179378817529}, {"x": 3.888888888888889, "y_x2": 15.123456790123456, "y_sqrt": 1.9720265943665387}, {"x": 3.9393939393939394, "y_x2": 15.5188246097337, "y_sqrt": 1.9847906537954927}, {"x": 3.9898989898989896, "y_x2": 15.919293949596977, "y_sqrt": 1.9974731512335753}, {"x": 4.040404040404041, "y_x2": 16.324864809713297, "y_sqrt": 2.010075630518424}, {"x": 4.090909090909091, "y_x2": 16.735537190082646, "y_sqrt": 2.0225995873897262}, {"x": 4.141414141414141, "y_x2": 17.151311090705025, "y_sqrt": 2.035046471561311}, {"x": 4.191919191919192, "y_x2": 17.57218651158045, "y_sqrt": 2.0474176886798627}, {"x": 4.242424242424242, "y_x2": 17.998163452708905, "y_sqrt": 2.059714602177749}, {"x": 4.292929292929293, "y_x2": 18.4292419140904, "y_sqrt": 2.07193853502687}, {"x": 4.343434343434343, "y_x2": 18.865421895724925, "y_sqrt": 2.0840907713999273}, {"x": 4.393939393939394, "y_x2": 19.306703397612484, "y_sqrt": 2.0961725582450015}, {"x": 4.444444444444445, "y_x2": 19.75308641975309, "y_sqrt": 2.1081851067789197}, {"x": 4.494949494949495, "y_x2": 20.204570962146718, "y_sqrt": 2.120129593904461}, {"x": 4.545454545454545, "y_x2": 20.661157024793383, "y_sqrt": 2.1320071635561044}, {"x": 4.595959595959596, "y_x2": 21.122844607693093, "y_sqrt": 2.143818927978666}, {"x": 4.646464646464646, "y_x2": 21.58963371084583, "y_sqrt": 2.1555659689428777}, {"x": 4.696969696969697, "y_x2": 22.061524334251608, "y_sqrt": 2.1672493389016636}, {"x": 4.747474747474747, "y_x2": 22.538516477910417, "y_sqrt": 2.178870062090612}, {"x": 4.797979797979798, "y_x2": 23.02061014182226, "y_sqrt": 2.190429135575903}, {"x": 4.848484848484849, "y_x2": 23.507805325987146, "y_sqrt": 2.2019275302527213}, {"x": 4.898989898989899, "y_x2": 24.00010203040506, "y_sqrt": 2.2133661917969873}, {"x": 4.94949494949495, "y_x2": 24.497500255076016, "y_sqrt": 2.2247460415730487}, {"x": 5.0, "y_x2": 25.0, "y_sqrt": 2.23606797749979}]}}, {"mode": "vega-lite"});
+</script>
+</div>
+</div>
+<p><strong>USE CASES</strong></p>
+<p>Altair is widely used in different domains because of its interactive capabilities, declarative syntax, and smooth integration with Python data science tools. Here are some important areas where Altair proves to be especially useful:</p>
+<p>1.⁠ ⁠Data Exploration &amp; Analysis • Altair allows users to visualise distributions and relationships in datasets, making it perfect for rapid exploratory data analysis (EDA). 2.⁠ ⁠Interactive Dashboards &amp; Reports •⁠ ⁠With Altair, users can create interactive plots that display dynamic distributions in environments like Jupyter Notebooks, Streamlit, or Voila. 3.⁠ ⁠Machine Learning &amp; AI •⁠ ⁠It aids in important analyses such as visualizing model performance (e.g., confusion matrices, ROC curves) and understanding data distribution prior to model training. 4.⁠ ⁠Business Intelligence &amp; Decision Making •⁠ ⁠Companies uses Altair Library for data-driven storytelling to extract meaningful insights from their data. 5.⁠ ⁠Realtime Data Monitoring Altair is capable to visualise streaming data which is useful in monitoring website traffic, server performance or stocks etc. 6.⁠ ⁠Geographic Data •⁠ ⁠Altair enables users geospatial plotting, making it valuable for mapping and location-based analytics.</p>
+<p><strong>CONCLUSION</strong></p>
+<p>Altair is an easy-to-use, high-powered, and versatile data science visualization library that’s built for contemporary data science workflows. It’s remarkable in many ways. Altair may not completely replace Matplotlib or Seaborn for highly customised visualisations, but it is ideal in scenarios where expressiveness, simplicity, and interactivity are important. For data analysts, machine learning practitioners or businesses Altair is a crucial tool to include in the data visualisation toolkit!</p>
+<p><strong>REFERENCES and FURTHER READINGS</strong></p>
+<p><strong>Official Documentation: </strong> https://altair-viz.github.io/user_guide/api.html#api</p>
+<p><strong>Video Tutorial : </strong> 1)https://www.youtube.com/watch?v=ms29ZPUKxbU by Jake VanderPlas 2)https://youtu.be/umTwkgQoo_E?si=DbeemSCUDsWo4mCX</p>
+<p><strong>Vega-Lite Docs :</strong> https://vega.github.io/vega-lite-v2/docs/</p>
 
 
 </section>
