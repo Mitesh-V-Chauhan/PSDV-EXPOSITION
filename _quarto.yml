@@ -37,7 +37,6 @@ website:
         text: Home
       - href: blog.qmd
         text: Blog
-  page-footer: footer.html
 
 format:
   html:
