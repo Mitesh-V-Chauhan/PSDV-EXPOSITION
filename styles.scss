@@ -1,5 +1,22 @@
+// /*-- scss:defaults --*/
+
+// @import 'https://fonts.googleapis.com/css2?family=Roboto:wght@300&display=swap';
+
+// $font-family: "Roboto", sans-serif;
+// $font-family-serif: "Roboto", sans-serif;
+
+// /*-- scss:rules --*/
+// kbd,
+// .kbd {
+//     background-color: #88ff9e !important;
+// }
+
+// .navbar {
+//     padding-top: 0.5rem;
+//     padding-bottom: 0.5rem;
+// }
+
 /*-- scss:defaults --*/  
-// Define default variables  
 $font-family: "Poppins", sans-serif;  
 $code-font: "Fira Code", monospace;  
 
@@ -13,9 +30,17 @@ $border-radius: 12px;
 $transition-speed: 0.3s;
 $box-shadow: 0 4px 12px rgba(125, 92, 60, 0.2);
 
-/*-- scss:rules --*/  
-// Your styles go here  
+/*-- scss:mixins --*/
+@mixin transition-effect {
+    transition: all $transition-speed ease-in-out;
+}
 
+/*-- scss:functions --*/
+@function lighten-color($color, $percentage) {
+    @return mix(white, $color, $percentage);
+}
+
+/*-- scss:rules --*/  
 @import 'https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&family=Fira+Code:wght@400&display=swap';
 
 /* 🌍 Global Page Styling */
@@ -45,7 +70,7 @@ body {
         text-decoration: none;
         font-weight: 600;
         padding: 0.5rem 1rem;
-        transition: color $transition-speed ease-in-out;
+        @include transition-effect;
 
         &:hover {
             color: $hover-text-color;
@@ -53,27 +78,10 @@ body {
     }
 }
 
-/* ✅ Fix: No Blue Click Effect */
-a:focus, a:active {
-    color: $hover-text-color !important;
-    background: transparent !important;
-    outline: none !important;
-}
-
-/* ✅ Fix: Remove Hover from Page Titles */
-h1, h2, h3 {
-    text-decoration: none !important;
-    color: $text-color !important;
-}
-
-h1:hover, h2:hover, h3:hover {
-    color: $text-color !important;
-}
-
 /* ✅ Fix: Active Page is Brown */
 .navbar .active, 
 .navbar a:active {
-    color: $hover-text-color !important;
+    color: brown !important;
     font-weight: bold;
 }
 
@@ -84,7 +92,7 @@ h1:hover, h2:hover, h3:hover {
     padding: 1.5rem;
     border-radius: $border-radius;
     box-shadow: $box-shadow;
-    transition: transform $transition-speed ease-in-out, box-shadow $transition-speed ease-in-out;
+    @include transition-effect;
     cursor: pointer;
     border: 2px solid transparent;
     text-align: left;
@@ -98,31 +106,6 @@ h1:hover, h2:hover, h3:hover {
         box-shadow: 0 6px 20px rgba(139, 94, 59, 0.3);
         border-color: $primary-color;
     }
-
-    a {
-        text-decoration: none;
-        font-weight: bold;
-        color: $text-color;
-        display: block;
-        font-size: 1.2rem;
-        margin-bottom: 0.5rem;
-
-        &:hover {
-            color: $hover-text-color;
-        }
-    }
-
-    .date {
-        font-size: 0.9rem;
-        color: #7D5C3C;
-        margin-top: 0.5rem;
-    }
-
-    p {
-        font-size: 0.95rem;
-        color: #5C3C2E;
-        margin-top: 0.5rem;
-    }
 }
 
 /* ✅ Buttons */
@@ -134,23 +117,11 @@ button, .btn {
     font-size: 1rem;
     border-radius: $border-radius;
     cursor: pointer;
-    transition: background-color $transition-speed ease-in-out, box-shadow $transition-speed ease-in-out;
+    @include transition-effect;
 
     &:hover {
         background-color: $hover-text-color;
         box-shadow: 0 4px 10px rgba(139, 94, 59, 0.3);
-    }
-}
-
-/* ✅ Links */
-a {
-    color: $primary-color;
-    text-decoration: none;
-    font-weight: 500;
-
-    &:hover {
-        color: $hover-text-color;
-        text-decoration: none; /* ✅ No underline */
     }
 }
 
