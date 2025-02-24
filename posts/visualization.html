@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>4. Handling Multiple plots – Vega-Altair Blog</title>
+<title>visualization – Vega-Altair Blog</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -145,25 +145,9 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <!-- margin-sidebar -->
     
 <!-- main -->
-<main class="content" id="quarto-document-content">
-
-<header id="title-block-header" class="quarto-title-block default">
-<div class="quarto-title">
-<h1 class="title"><strong>4. Handling Multiple plots</strong></h1>
-</div>
+<main class="content" id="quarto-document-content"><header id="title-block-header" class="quarto-title-block"></header>
 
 
-
-<div class="quarto-title-meta">
-
-    
-  
-    
-  </div>
-  
-
-
-</header>
 
 
 <section id="altair-the-interactive-data-visualization-tool" class="level1">
@@ -180,11 +164,11 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <section id="step-1" class="level4">
 <h4 class="anchored" data-anchor-id="step-1"><strong>Step 1:</strong></h4>
 <p><strong>Using pip:</strong></p>
-<div id="cell-8" class="cell">
+<div id="cell-7" class="cell">
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="op">!</span> pip install altair </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p><strong>Using condas</strong></p>
-<div id="cell-10" class="cell">
+<div id="cell-9" class="cell">
 <div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="op">!</span> conda install <span class="op">-</span>c conda<span class="op">-</span>forge altair</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
@@ -192,22 +176,22 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <h4 class="anchored" data-anchor-id="step-2"><strong>Step 2:</strong></h4>
 <p>Install a Renderer (For Jupyter, Colab, or VS Code), which is required for displaying charts, plots, etc.</p>
 <p><strong>For Jupyter Notebook</strong></p>
-<div id="cell-14" class="cell">
+<div id="cell-13" class="cell">
 <div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="op">!</span> pip install vega_datasets notebook vega</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<div id="cell-15" class="cell">
+<div id="cell-14" class="cell">
 <div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> altair <span class="im">as</span> alt</span>
 <span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>alt.renderers.enable(<span class="st">'notebook'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p><strong>For VS Code</strong></p>
-<div id="cell-17" class="cell">
+<div id="cell-16" class="cell">
 <div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> altair <span class="im">as</span> alt</span>
 <span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>alt.renderers.enable(<span class="st">'mimetype'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p><strong>For Google Colab</strong></p>
-<div id="cell-19" class="cell">
+<div id="cell-18" class="cell">
 <div class="sourceCode cell-code" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> altair <span class="im">as</span> alt</span>
 <span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>alt.renderers.enable(<span class="st">'colab'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -219,7 +203,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <section id="declarative-syntax-and-conciseness" class="level5">
 <h5 class="anchored" data-anchor-id="declarative-syntax-and-conciseness"><strong>1. Declarative Syntax and Conciseness</strong></h5>
 <p>Altair allows us to write the code in declarative manner, that is we need to specify only what we want and not how we want, altair will figure it out at it’s own end. Also altair allows us to write the code in fewer lines due to its declarative syntax property.</p>
-<div id="cell-23" class="cell" data-execution_count="9">
+<div id="cell-22" class="cell" data-execution_count="9">
 <div class="sourceCode cell-code" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
 <span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> altair <span class="im">as</span> alt</span>
 <span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
@@ -287,7 +271,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 </div>
 <p>Using Matplotlib:</p>
-<div id="cell-25" class="cell" data-execution_count="7">
+<div id="cell-24" class="cell" data-execution_count="7">
 <div class="sourceCode cell-code" id="cb8"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>plt.bar(df[<span class="st">'Name'</span>], df[<span class="st">'Horsepower'</span>])</span>
 <span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>plt.title(<span class="st">'Horsepower of Car'</span>)</span>
 <span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>plt.xlabel(<span class="st">'Name'</span>)</span>
@@ -303,7 +287,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 </div>
 <p>Using altair:</p>
-<div id="cell-27" class="cell" data-execution_count="8">
+<div id="cell-26" class="cell" data-execution_count="8">
 <div class="sourceCode cell-code" id="cb9"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>chart <span class="op">=</span> alt.Chart(df).mark_bar().encode(</span>
 <span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>    x<span class="op">=</span><span class="st">'Name'</span>, y<span class="op">=</span><span class="st">'Horsepower'</span></span>
 <span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a>).properties(title<span class="op">=</span><span class="st">'Horsepower of Car'</span>)</span>
@@ -388,7 +372,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <li>We can add brush with opacity to be able to highlight a particular section</li>
 <li>Use tooltips</li>
 </ul>
-<div id="cell-30" class="cell" data-execution_count="23">
+<div id="cell-29" class="cell" data-execution_count="23">
 <div class="sourceCode cell-code" id="cb10"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"</span><span class="ch">\t</span><span class="st">Tooltip"</span>)</span>
 <span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> IPython.display <span class="im">import</span> Image, display</span>
 <span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a>display(Image(filename<span class="op">=</span><span class="st">"1.jpg"</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -403,7 +387,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 </div>
 </div>
-<div id="cell-31" class="cell" data-execution_count="25">
+<div id="cell-30" class="cell" data-execution_count="25">
 <div class="sourceCode cell-code" id="cb12"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"</span><span class="ch">\t</span><span class="st">Highlighting a specific section"</span>)</span>
 <span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> IPython.display <span class="im">import</span> Image, display</span>
 <span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a>display(Image(filename<span class="op">=</span><span class="st">"2.jpg"</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -423,7 +407,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <h5 class="anchored" data-anchor-id="data-aggregation"><strong>3. Data aggregation</strong></h5>
 <p>In altair we need not process the data before, that is we don’t need to create a groupby object beforehand. But in matplotlib we first have to select the specific data using aggregation.</p>
 <p>Matplotlib</p>
-<div id="cell-35" class="cell" data-execution_count="28">
+<div id="cell-34" class="cell" data-execution_count="28">
 <div class="sourceCode cell-code" id="cb14"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a>avgmpg <span class="op">=</span> df.groupby(<span class="st">'Origin'</span>)[<span class="st">'MPG'</span>].mean()</span>
 <span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a>plt.bar(avgmpg.index, avgmpg.values, color<span class="op">=</span>[<span class="st">'blue'</span>, <span class="st">'green'</span>, <span class="st">'red'</span>])</span>
 <span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a>plt.title(<span class="st">'Average MPG by Origin'</span>)</span>
@@ -439,7 +423,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 </div>
 <p>Altair</p>
-<div id="cell-37" class="cell" data-execution_count="31">
+<div id="cell-36" class="cell" data-execution_count="31">
 <div class="sourceCode cell-code" id="cb15"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a>chart <span class="op">=</span> alt.Chart(df).mark_bar().encode(</span>
 <span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a>    x<span class="op">=</span><span class="st">'Origin'</span>, y<span class="op">=</span>alt.Y(<span class="st">'mean(MPG)'</span>),</span>
 <span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a>    color<span class="op">=</span><span class="st">'Origin'</span></span>
@@ -516,9 +500,12 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </script>
 </div>
 </div>
+</section>
+<section id="handling-multiple-plots" class="level5">
+<h5 class="anchored" data-anchor-id="handling-multiple-plots"><strong>4. Handling Multiple plots</strong></h5>
 <p>Altair allows us to plot multiple plots easily. It allows us to plot more than one parameters in a single plot just by using + operator, plot two graphs horizontally(side by side) by using “|” operator and vertically by using “&amp;” operator, which is much more simpler than in matplotlib.</p>
 <p>Matplotlib</p>
-<div id="cell-41" class="cell" data-execution_count="76">
+<div id="cell-40" class="cell" data-execution_count="76">
 <div class="sourceCode cell-code" id="cb16"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
 <span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
 <span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> altair <span class="im">as</span> alt</span>
@@ -533,7 +520,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 <p><strong>Ploting multiple graphs on same plot</strong></p>
 <p>Matplotlib</p>
-<div id="cell-44" class="cell" data-execution_count="62">
+<div id="cell-43" class="cell" data-execution_count="62">
 <div class="sourceCode cell-code" id="cb17"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a>plt.figure(figsize<span class="op">=</span>(<span class="dv">8</span>, <span class="dv">4</span>))</span>
 <span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a>plt.plot(data[<span class="st">'x'</span>], data[<span class="st">'y_x2'</span>], <span class="st">'r-'</span>, label<span class="op">=</span><span class="st">'y = x^2'</span>)</span>
 <span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a>plt.plot(data[<span class="st">'x'</span>], data[<span class="st">'y_sqrt'</span>], <span class="st">'b'</span>, label<span class="op">=</span><span class="st">'y = sqrt(x)'</span>)</span>
@@ -553,7 +540,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 </div>
 <p>Altair</p>
-<div id="cell-46" class="cell" data-execution_count="64">
+<div id="cell-45" class="cell" data-execution_count="64">
 <div class="sourceCode cell-code" id="cb18"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a>x2 <span class="op">=</span> alt.Chart(data).mark_line(color<span class="op">=</span><span class="st">'red'</span>).encode(</span>
 <span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a>    x<span class="op">=</span><span class="st">'x'</span>, y<span class="op">=</span><span class="st">'y_x2'</span></span>
 <span id="cb18-3"><a href="#cb18-3" aria-hidden="true" tabindex="-1"></a>    ).properties(width<span class="op">=</span><span class="dv">300</span>, height<span class="op">=</span><span class="dv">200</span>)</span>
@@ -635,7 +622,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 <p><strong>Ploting graphs side by side</strong></p>
 <p>Matplotlib</p>
-<div id="cell-49" class="cell" data-execution_count="67">
+<div id="cell-48" class="cell" data-execution_count="67">
 <div class="sourceCode cell-code" id="cb19"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a>fig, (ax1, ax2) <span class="op">=</span> plt.subplots(<span class="dv">1</span>, <span class="dv">2</span>, figsize<span class="op">=</span>(<span class="dv">10</span>, <span class="dv">4</span>))</span>
 <span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a>ax1.plot(data[<span class="st">'x'</span>], data[<span class="st">'y_x2'</span>], <span class="st">'r'</span>, label<span class="op">=</span><span class="st">'y = x^2'</span>)</span>
 <span id="cb19-3"><a href="#cb19-3" aria-hidden="true" tabindex="-1"></a>ax1.set_title(<span class="st">'y = x^2'</span>)</span>
@@ -661,7 +648,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 </div>
 <p>Altair</p>
-<div id="cell-51" class="cell" data-execution_count="70">
+<div id="cell-50" class="cell" data-execution_count="70">
 <div class="sourceCode cell-code" id="cb20"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a>x2 <span class="op">=</span> alt.Chart(data).mark_line(color<span class="op">=</span><span class="st">'red'</span>).encode(</span>
 <span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a>    x<span class="op">=</span><span class="st">'x'</span>, y<span class="op">=</span><span class="st">'y_x2'</span></span>
 <span id="cb20-3"><a href="#cb20-3" aria-hidden="true" tabindex="-1"></a>).properties(width<span class="op">=</span><span class="dv">200</span>, height<span class="op">=</span><span class="dv">200</span>, title<span class="op">=</span><span class="st">'y = x^2'</span>)</span>
@@ -745,7 +732,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 <p><strong>Ploting graphs one above other</strong></p>
 <p>Matplotlib</p>
-<div id="cell-54" class="cell" data-execution_count="73">
+<div id="cell-53" class="cell" data-execution_count="73">
 <div class="sourceCode cell-code" id="cb21"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a>fig, (ax1, ax2) <span class="op">=</span> plt.subplots(<span class="dv">2</span>, <span class="dv">1</span>, figsize<span class="op">=</span>(<span class="dv">6</span>, <span class="dv">6</span>))</span>
 <span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a>ax1.plot(data[<span class="st">'x'</span>], data[<span class="st">'y_x2'</span>], <span class="st">'r-'</span>, label<span class="op">=</span><span class="st">'y = x^2'</span>)</span>
 <span id="cb21-3"><a href="#cb21-3" aria-hidden="true" tabindex="-1"></a>ax1.set_title(<span class="st">'y = x^2'</span>)</span>
@@ -771,7 +758,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 </div>
 <p>Altair</p>
-<div id="cell-56" class="cell" data-execution_count="75">
+<div id="cell-55" class="cell" data-execution_count="75">
 <div class="sourceCode cell-code" id="cb22"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a>x2 <span class="op">=</span> alt.Chart(data).mark_line(color<span class="op">=</span><span class="st">'red'</span>).encode(</span>
 <span id="cb22-2"><a href="#cb22-2" aria-hidden="true" tabindex="-1"></a>    x<span class="op">=</span><span class="st">'x'</span>, y<span class="op">=</span><span class="st">'y_x2'</span></span>
 <span id="cb22-3"><a href="#cb22-3" aria-hidden="true" tabindex="-1"></a>).properties(width<span class="op">=</span><span class="dv">300</span>, height<span class="op">=</span><span class="dv">150</span>, title<span class="op">=</span><span class="st">'y = x^2'</span>)</span>
@@ -858,9 +845,9 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <p><strong>CONCLUSION</strong></p>
 <p>Altair is an easy-to-use, high-powered, and versatile data science visualization library that’s built for contemporary data science workflows. It’s remarkable in many ways. Altair may not completely replace Matplotlib or Seaborn for highly customised visualisations, but it is ideal in scenarios where expressiveness, simplicity, and interactivity are important. For data analysts, machine learning practitioners or businesses Altair is a crucial tool to include in the data visualisation toolkit!</p>
 <p><strong>REFERENCES and FURTHER READINGS</strong></p>
-<p><strong>Official Documentation: </strong> https://altair-viz.github.io/user_guide/api.html#api</p>
-<p><strong>Video Tutorial : </strong> 1)https://www.youtube.com/watch?v=ms29ZPUKxbU by Jake VanderPlas 2)https://youtu.be/umTwkgQoo_E?si=DbeemSCUDsWo4mCX</p>
-<p><strong>Vega-Lite Docs :</strong> https://vega.github.io/vega-lite-v2/docs/</p>
+<p><strong>Official Documentation: </strong> <a href="https://altair-viz.github.io/user_guide/api.html#api" target="_blank"> https://altair-viz.github.io/user_guide/api.html#api </a></p>
+<p><strong>Video Tutorial:</strong><br> 1) <a href="https://www.youtube.com/watch?v=ms29ZPUKxbU" target="_blank"> https://www.youtube.com/watch?v=ms29ZPUKxbU</a> by Jake VanderPlas <br> 2) <a href="https://youtu.be/umTwkgQoo_E?si=DbeemSCUDsWo4mCX" target="_blank"> https://youtu.be/umTwkgQoo_E?si=DbeemSCUDsWo4mCX</a></p>
+<p><strong>Vega-Lite Docs:</strong><br> <a href="https://vega.github.io/vega-lite-v2/docs/" target="_blank"> https://vega.github.io/vega-lite-v2/docs/ </a></p>
 
 
 </section>
