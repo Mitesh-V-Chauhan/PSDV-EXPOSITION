@@ -9,6 +9,7 @@ $background-color: #FAF3E0; /* Warm cream */
 $text-color: #3D2C1E; /* Dark brown */
 $primary-color: #A67C52; /* Soft brown */
 $secondary-color: #F5E6CC; /* Light beige for boxes */
+$coffee-color: #6F4E37;
 $hover-text-color: #8B5E3B; /* Rich brown for hover */
 $border-radius: 12px;
 $transition-speed: 0.3s;
@@ -202,6 +203,23 @@ main {
     color: white !important;  /* Match navbar text color */
     font-weight: bold;        /* Optional: Makes active link bold */
     text-decoration: none !important;
+}
+
+
+/* Styling Links */
+a {
+    color: $coffee-color; /* Change hyperlink color to coffee */
+    text-decoration: none; /* Remove underline */
+
+    &:hover {
+        color: darken($coffee-color, 10%);
+        text-decoration: underline; /* Underline on hover */
+    }
+}
+
+/* Underline for Specific Links */
+a[href*="altair-viz.github.io"] {
+    text-decoration: underline; /* Force underline for Altair Documentation link */
 }
 
 /* Responsive Design */

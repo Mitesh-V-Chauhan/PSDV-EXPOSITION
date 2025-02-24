@@ -12,7 +12,7 @@ You can visit our blog by clicking the **Blog** button in the top-right corner.
 
 ---
 
-### **📷 Featured Image & 🎥 Introduction Video**
+### **🎥 Introduction Video**
 <center>
 
 
@@ -27,6 +27,6 @@ You can visit our blog by clicking the **Blog** button in the top-right corner.
 ### **🚀 Explore More**
 🔹 Learn more on our **[Blog](blog.qmd)**  
 🔹 Check out **[Altair Documentation](https://altair-viz.github.io/)**  
-🔹 Follow our **GitHub** for updates  
+🔹 Follow our **[GitHub](https://github.com/Mitesh-V-Chauhan/PSDV-EXPOSITION.git)** for updates. 
 
 ---
