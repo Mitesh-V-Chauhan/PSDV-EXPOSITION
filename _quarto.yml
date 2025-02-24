@@ -1,3 +1,30 @@
+# project:
+#   type: website
+#   output-dir: docs
+
+# website:
+#   title: "Vega-Altair Blog"
+#   navbar:
+#     right:
+#       - href: index.qmd
+#         text: Home
+#       - href: blog.qmd
+#         text: Blog
+
+
+# format:
+#   html:
+#     theme:
+#       light: [litera, styles.scss]
+#     highlight-style: a11y-dark
+#     mainfont: "Roboto"
+#     code-copy: true
+#     code-overflow: wrap
+
+
+# execute:
+#   freeze: auto
+
 project:
   type: website
   output-dir: docs
@@ -11,16 +38,15 @@ website:
       - href: blog.qmd
         text: Blog
 
-
 format:
   html:
     theme:
-      light: [litera, styles.scss]
+      light: [litera, styles.scss]  # ✅ Ensuring styles.scss is applied correctly
+    css: styles.scss  # ✅ Explicitly adding styles.scss for safety
     highlight-style: a11y-dark
     mainfont: "Roboto"
     code-copy: true
     code-overflow: wrap
-
 
 execute:
   freeze: auto

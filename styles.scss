@@ -8,6 +8,7 @@ $text-color: #3D2C1E; /* Dark brown */
 $primary-color: #A67C52; /* Soft brown */
 $secondary-color: #F5E6CC; /* Light beige */
 $hover-text-color: #8B5E3B; /* Rich brown */
+$active-page-color: #8B5E3B; /* Brown for active page */
 $border-radius: 12px;
 $transition-speed: 0.3s;
 $box-shadow: 0 4px 12px rgba(125, 92, 60, 0.2);
@@ -27,7 +28,7 @@ $box-shadow: 0 4px 12px rgba(125, 92, 60, 0.2);
 
 /* 🌍 Global Page Styling */
 body {
-    font-family: $font-family;  /* ✅ No longer undefined */
+    font-family: $font-family;
     background-color: $background-color;
     color: $text-color;
     margin: 0;
@@ -57,5 +58,161 @@ body {
         &:hover {
             color: $hover-text-color;
         }
+    }
+
+    /* Active Page (Brown Color) */
+    .active {
+        color: $active-page-color !important;
+    }
+}
+
+/* ✅ Remove Blue Click Effect */
+a:focus, a:active {
+    color: $hover-text-color !important;
+    background: transparent !important;
+    outline: none !important;
+}
+
+/* ✅ Remove Hover from Page Titles */
+h1, h2, h3 {
+    text-decoration: none !important;
+    color: $text-color !important;
+}
+
+h1:hover, h2:hover, h3:hover {
+    color: $text-color !important;
+}
+
+/* ✅ Blog Post Grid Layout */
+.listing {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+    gap: 20px;
+    margin-top: 1rem;
+}
+
+/* ✅ Blog Post Box Styling */
+.listing .card, 
+.listing .quarto-listing-item {
+    background: $secondary-color;
+    padding: 1.5rem;
+    border-radius: $border-radius;
+    box-shadow: $box-shadow;
+    transition: transform $transition-speed ease-in-out, box-shadow $transition-speed ease-in-out;
+    cursor: pointer;
+    border: 2px solid transparent;
+    text-align: left;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    min-height: 180px;
+
+    &:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 6px 20px rgba(139, 94, 59, 0.3);
+        border-color: $primary-color;
+    }
+
+    a {
+        text-decoration: none;
+        font-weight: bold;
+        color: $text-color;
+        display: block;
+        font-size: 1.2rem;
+        margin-bottom: 0.5rem;
+
+        &:hover {
+            color: $hover-text-color;
+        }
+    }
+
+    .date {
+        font-size: 0.9rem;
+        color: #7D5C3C;
+        margin-top: 0.5rem;
+    }
+
+    p {
+        font-size: 0.95rem;
+        color: #5C3C2E;
+        margin-top: 0.5rem;
+    }
+}
+
+/* ✅ Buttons */
+button, .btn {
+    background-color: $primary-color;
+    color: white;
+    border: none;
+    padding: 0.75rem 1.5rem;
+    font-size: 1rem;
+    border-radius: $border-radius;
+    cursor: pointer;
+    transition: background-color $transition-speed ease-in-out, box-shadow $transition-speed ease-in-out;
+
+    &:hover {
+        background-color: $hover-text-color;
+        box-shadow: 0 4px 10px rgba(139, 94, 59, 0.3);
+    }
+}
+
+/* ✅ Links */
+a {
+    color: $primary-color;
+    text-decoration: none;
+    font-weight: 500;
+
+    &:hover {
+        color: $hover-text-color;
+        text-decoration: none;
+    }
+}
+
+/* ✅ Code Blocks */
+pre {
+    background-color: #4E3B31;
+    color: #ffffff;
+    padding: 1rem;
+    border-radius: $border-radius;
+    font-family: $code-font;
+    overflow-x: auto;
+    box-shadow: $box-shadow;
+}
+
+/* ✅ Keyboard Key Styling */
+kbd {
+    background-color: $primary-color;
+    color: white;
+    padding: 0.3rem 0.6rem;
+    border-radius: 5px;
+    font-weight: bold;
+    font-family: $code-font;
+    box-shadow: 0 2px 5px rgba(125, 92, 60, 0.2);
+
+    &:hover {
+        background-color: $hover-text-color;
+    }
+}
+
+/* ✅ Footer */
+.footer {
+    text-align: center;
+    padding: 1rem;
+    background-color: $primary-color;
+    color: white;
+    margin-top: 2rem;
+    border-top-left-radius: $border-radius;
+    border-top-right-radius: $border-radius;
+}
+
+/* ✅ Responsive Design */
+@media (max-width: 768px) {
+    .navbar {
+        flex-direction: column;
+        text-align: center;
+    }
+
+    .container {
+        padding: 1rem;
     }
 }
