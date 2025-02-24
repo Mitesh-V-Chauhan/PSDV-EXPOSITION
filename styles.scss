@@ -28,8 +28,7 @@ $background-color: #FAF3E0; // Warm cream
 $text-color: #3D2C1E; // Dark brown (readable)
 $primary-color: #A67C52; // Soft brown (for navbar, buttons, hover)
 $secondary-color: #F5E6CC; // Lighter beige (for cards, highlights)
-$hover-color: #8B5E3B; // Rich brown (for hover states)
-$hover-bg-color: #DEC6A0; // Soft cream background on hover
+$hover-text-color: #8B5E3B; // Rich brown for hover
 $border-radius: 12px;
 $transition-speed: 0.3s;
 $box-shadow: 0 4px 12px rgba(125, 92, 60, 0.2);
@@ -63,11 +62,10 @@ body {
         text-decoration: none;
         font-weight: 600;
         padding: 0.5rem 1rem;
-        transition: background-color $transition-speed ease-in-out;
+        transition: color $transition-speed ease-in-out;
 
         &:hover {
-            background-color: $hover-color;
-            border-radius: 8px;
+            color: $hover-text-color;  // Only text color changes on hover
         }
     }
 }
@@ -82,11 +80,12 @@ body {
 /* Blog Post Listing */
 .listing {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
     gap: 20px;
     margin-top: 1rem;
 }
 
+/* Blog Post Card - Standard Box Style */
 .post-item {
     background: $secondary-color;
     padding: 1.5rem;
@@ -96,12 +95,15 @@ body {
     cursor: pointer;
     border: 2px solid transparent;
     text-align: left;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    min-height: 180px;
 
     &:hover {
         transform: translateY(-5px);
         box-shadow: 0 6px 20px rgba(139, 94, 59, 0.3);
-        border-color: $hover-color;
-        background-color: $hover-bg-color;
+        border-color: $primary-color;  // Soft border color change
     }
 
     a {
@@ -111,6 +113,10 @@ body {
         display: block;
         font-size: 1.2rem;
         margin-bottom: 0.5rem;
+
+        &:hover {
+            color: $hover-text-color;  // Text hover effect
+        }
     }
 
     .date {
@@ -138,19 +144,19 @@ button, .btn {
     transition: background-color $transition-speed ease-in-out, box-shadow $transition-speed ease-in-out;
 
     &:hover {
-        background-color: $hover-color;
+        background-color: $hover-text-color;
         box-shadow: 0 4px 10px rgba(139, 94, 59, 0.3);
     }
 }
 
 /* Links */
 a {
-    color: $hover-color;
+    color: $primary-color;
     text-decoration: none;
     font-weight: 500;
 
     &:hover {
-        color: $hover-color;
+        color: $hover-text-color;  // Text hover effect
         text-decoration: underline;
     }
 }
@@ -177,7 +183,7 @@ kbd {
     box-shadow: 0 2px 5px rgba(125, 92, 60, 0.2);
 
     &:hover {
-        background-color: $hover-color;
+        background-color: $hover-text-color;
     }
 }
 
