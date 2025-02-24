@@ -176,6 +176,35 @@ kbd {
     border-top-left-radius: $border-radius;
     border-top-right-radius: $border-radius;
 }
+/* Footer */
+.footer {
+    text-align: center;
+    padding: 1rem;
+    background-color: #A67C52; /* Adjust to your theme */
+    color: white;
+    font-size: 0.9rem;
+    margin-top: 2rem;
+    border-top-left-radius: 12px;
+    border-top-right-radius: 12px;
+}
+
+/* Ensure the footer stays at the bottom */
+body {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+
+main {
+    flex: 1;
+}
+
+.navbar .nav-link.active,
+.navbar .nav-item a.active {
+    color: white !important;  /* Match navbar text color */
+    font-weight: bold;        /* Optional: Makes active link bold */
+    text-decoration: none !important;
+}
 
 /* Responsive Design */
 @media (max-width: 768px) {
