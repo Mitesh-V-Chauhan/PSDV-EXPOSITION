@@ -18,79 +18,124 @@
 
 /*-- scss:defaults --*/
 
-@import 'https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap';
+@import 'https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&family=Fira+Code:wght@400&display=swap';
 
 $font-family: "Poppins", sans-serif;
-$primary-color: #1E1E1E;  // Deep charcoal for a modern dark theme
-$secondary-color: #EAEAEA;  // Soft, premium white for contrast
-$accent-color: #8BC34A;  // Sophisticated muted green
+$code-font: "Fira Code", monospace;
+
+$background-dark: #121212;
+$background-light: #ffffff;
+$text-dark: #eaeaea;
+$text-light: #333333;
+$primary-color: #2196F3;  // Modern blue for accents
+$secondary-color: #282c34;
 $border-radius: 10px;
 $transition-speed: 0.3s;
 
 /*-- scss:rules --*/
 
-/* Modern & Luxurious Page Styling */
+/* Global Page Styling */
 body {
     font-family: $font-family;
-    background-color: $primary-color;
-    color: $secondary-color;
+    background-color: $background-dark;
+    color: $text-dark;
     margin: 0;
     padding: 0;
     line-height: 1.75;
 }
 
-/* Sleek Navbar */
+/* Responsive Navbar */
 .navbar {
     padding: 1rem 2rem;
-    background-color: #222; // Elegant dark shade
-    color: $secondary-color;
-    font-weight: 400;
-    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.2);
+    background-color: $secondary-color;
+    color: $text-dark;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
     border-bottom-left-radius: $border-radius;
     border-bottom-right-radius: $border-radius;
     transition: box-shadow $transition-speed ease-in-out;
 
-    &:hover {
-        box-shadow: 0 8px 20px rgba(0, 0, 0, 0.25);
+    a {
+        color: $text-dark;
+        text-decoration: none;
+        font-weight: 600;
+        padding: 0.5rem 1rem;
+        transition: color $transition-speed ease-in-out;
+
+        &:hover {
+            color: $primary-color;
+        }
     }
 }
 
-/* Premium Keyboard Key Styling */
-kbd,
-.kbd {
-    background-color: $accent-color;
-    color: $primary-color;
-    padding: 0.4rem 0.8rem;
-    border-radius: $border-radius;
-    box-shadow: 0 3px 8px rgba(0, 0, 0, 0.25);
-    font-weight: 600;
-    font-size: 0.95rem;
-    text-transform: uppercase;
-    letter-spacing: 0.05rem;
-    transition: all $transition-speed ease-in-out;
+/* Main Content */
+.container {
+    max-width: 800px;
+    margin: auto;
+    padding: 2rem;
+}
 
-    &:hover {
-        transform: translateY(-2px);
-        box-shadow: 0 5px 12px rgba(0, 0, 0, 0.3);
+/* Blog Post Listing */
+.listing {
+    margin-top: 1rem;
+
+    .post-item {
+        background: $secondary-color;
+        padding: 1.2rem;
+        border-radius: $border-radius;
+        margin-bottom: 1rem;
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
+        transition: transform $transition-speed ease-in-out;
+
+        &:hover {
+            transform: translateY(-5px);
+        }
+
+        a {
+            text-decoration: none;
+            font-weight: bold;
+            color: $primary-color;
+        }
+
+        .date {
+            font-size: 0.9rem;
+            color: #aaa;
+        }
     }
 }
 
-/* Buttons (Optional, for more aesthetic appeal) */
-button {
-    background-color: $accent-color;
-    color: $primary-color;
-    padding: 0.7rem 1.5rem;
+/* Code Blocks */
+pre {
+    background-color: #1e1e1e;
+    color: #fff;
+    padding: 1rem;
     border-radius: $border-radius;
-    border: none;
-    font-size: 1rem;
-    font-weight: 600;
-    cursor: pointer;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
-    transition: all $transition-speed ease-in-out;
+    font-family: $code-font;
+    overflow-x: auto;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+}
 
-    &:hover {
-        background-color: darken($accent-color, 10%);
-        box-shadow: 0 6px 15px rgba(0, 0, 0, 0.25);
-        transform: translateY(-3px);
+/* Keyboard Key Styling */
+kbd {
+    background-color: $primary-color;
+    color: #fff;
+    padding: 0.3rem 0.6rem;
+    border-radius: 5px;
+    font-weight: bold;
+    font-family: $code-font;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .navbar {
+        flex-direction: column;
+        text-align: center;
+    }
+
+    .container {
+        padding: 1rem;
     }
 }
