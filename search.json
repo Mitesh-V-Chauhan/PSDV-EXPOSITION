@@ -14,17 +14,10 @@
     "text": "Altair: The interactive data visualization tool\n\nIntroduction\nThe Altair library was released in August 2016 by Jake VanderPlas, Brian Granger, and other contributors from the Jupyter and PyData communities. It is a declarative statistical visualization library for Python, meaning that we don’t need to code how to do something instead we need to just tell what to do, altair will automatically figure out how to do it. Altair library creates beautiful interactive large variety of graphs like simple bar chart, histograms, line plot, scatter plot, to more complex graphs like heatmaps, geographical maps, etc.\nSo, why do we need it? We can use the simply pandas and matplotlib libraries for creating these graphs.\nAltair library makes the graph interactive which we can’t get from the above mentioned libraries or we can get them but it would require to code alot, with features like tooltips, zooming in and out of plots, selections with opacity, color, size (hover effect), dynamic update, also altair allows us to export the file into html files.\n\n\nInstallation & Setup:\nAltair can be simply installed by running the following command on the terminal:\n\nStep 1:\nUsing pip:\n\n! pip install altair \n\nUsing condas\n\n! conda install -c conda-forge altair\n\n\n\nStep 2:\nInstall a Renderer (For Jupyter, Colab, or VS Code), which is required for displaying charts, plots, etc.\nFor Jupyter Notebook\n\n! pip install vega_datasets notebook vega\n\n\nimport altair as alt\n\nalt.renderers.enable('notebook')\n\nFor VS Code\n\nimport altair as alt\n\nalt.renderers.enable('mimetype')\n\nFor Google Colab\n\nimport altair as alt\n\nalt.renderers.enable('colab')"
   },
   {
-    "objectID": "index.html",
-    "href": "index.html",
-    "title": "Vega-Altair: A Declarative Statistical Visualization Library",
-    "section": "",
-    "text": "Hello! We are three first-year undergraduates from IIT Gandhinagar.\nWe created this site to provide information about Altair, a powerful declarative statistical visualization library.\nYou can visit our blog by clicking the Blog button in the top-right corner.\n\n\n\n\n\n\n\nYour browser does not support the video tag. \n\n\n\n\n\n🔹 Learn more on our Blog\n🔹 Check out Altair Documentation\n🔹 Follow our GitHub for updates"
-  },
-  {
     "objectID": "index.html#welcome-to-vega-altair-blog",
     "href": "index.html#welcome-to-vega-altair-blog",
     "title": "Vega-Altair: A Declarative Statistical Visualization Library",
-    "section": "",
-    "text": "Hello! We are three first-year undergraduates from IIT Gandhinagar.\nWe created this site to provide information about Altair, a powerful declarative statistical visualization library.\nYou can visit our blog by clicking the Blog button in the top-right corner.\n\n\n\n\n\n\n\nYour browser does not support the video tag. \n\n\n\n\n\n🔹 Learn more on our Blog\n🔹 Check out Altair Documentation\n🔹 Follow our GitHub for updates"
+    "section": "Welcome to Vega-Altair Blog!",
+    "text": "Welcome to Vega-Altair Blog!\nHello! We are three first-year undergraduates from IIT Gandhinagar.\nWe created this site to provide information about Altair, a powerful declarative statistical visualization library.\nYou can visit our blog by clicking the Blog button in the top-right corner.\n\n\n📷 Featured Image & 🎥 Introduction Video\n\n\n\nYour browser does not support the video tag. \n\n\n\n\n🚀 Explore More\n🔹 Learn more on our Blog\n🔹 Check out Altair Documentation\n🔹 Follow our GitHub for updates"
   }
 ]
