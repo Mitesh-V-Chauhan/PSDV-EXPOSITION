@@ -1,6 +1,31 @@
 ---
-title: Vega-Altair  A Declarative Statistical Visualization Library
+title: "Vega-Altair: A Declarative Statistical Visualization Library"
 ---
 
-Hello ! We are three first year undergraduate from IIT Gandhingar. We created this site to give you information about altair.
-You can visit to our blog by Clicking on blog button on top-right corner.
+## Welcome to Vega-Altair Blog!  
+
+Hello! We are three first-year undergraduates from **IIT Gandhinagar**.  
+We created this site to provide information about **Altair**, a powerful **declarative statistical visualization library**.
+
+You can visit our blog by clicking the **Blog** button in the top-right corner.
+
+---
+
+### **📷 Featured Image & 🎥 Introduction Video**
+<center>
+<img src="media/image.png" alt="Altair Visualization Example" width="80%">
+
+<video controls width="80%">
+  <source src="media/WhatsApp Video 2025-02-23 at 23.24.45.mp4" type="video/mp4">
+  Your browser does not support the video tag.
+</video>
+</center>
+
+---
+
+### **🚀 Explore More**
+🔹 Learn more on our **[Blog](blog.qmd)**  
+🔹 Check out **[Altair Documentation](https://altair-viz.github.io/)**  
+🔹 Follow our **GitHub** for updates  
+
+---
