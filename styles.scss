@@ -177,15 +177,13 @@ kbd {
     border-top-right-radius: $border-radius;
 }
 /* Footer */
+/* Footer */
 .footer {
     text-align: center;
     padding: 1rem;
-    background-color: #A67C52; /* Adjust to your theme */
-    color: white;
+    color: rgb(226, 118, 22);
     font-size: 0.9rem;
     margin-top: 2rem;
-    border-top-left-radius: 12px;
-    border-top-right-radius: 12px;
 }
 
 /* Ensure the footer stays at the bottom */
