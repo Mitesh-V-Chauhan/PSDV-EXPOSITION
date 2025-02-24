@@ -5,7 +5,5 @@ listing:
   sort: "date desc"
   type: default
   categories: true
-  show-summary: true # Ensure summaries are visible
-  filters:
-    - category: "Altair" # Adjust category if needed
 ---
+
