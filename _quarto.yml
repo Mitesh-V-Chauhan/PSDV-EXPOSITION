@@ -41,10 +41,9 @@ website:
 format:
   html:
     theme:
-      light: [litera, styles.scss]  # ✅ Ensuring styles.scss is applied correctly
-    css: styles.scss  # ✅ Explicitly adding styles.scss for safety
+      light: [litera, styles.scss]  # Using SCSS for custom styling
     highlight-style: a11y-dark
-    mainfont: "Roboto"
+    mainfont: "Poppins"
     code-copy: true
     code-overflow: wrap
 
