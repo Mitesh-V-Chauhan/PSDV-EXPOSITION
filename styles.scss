@@ -1,17 +1,66 @@
+// /*-- scss:defaults --*/
+
+// @import 'https://fonts.googleapis.com/css2?family=Roboto:wght@300&display=swap';
+
+// $font-family: "Roboto", sans-serif;
+// $font-family-serif: "Roboto", sans-serif;
+
+// /*-- scss:rules --*/
+// kbd,
+// .kbd {
+//     background-color: #88ff9e !important;
+// }
+
+// .navbar {
+//     padding-top: 0.5rem;
+//     padding-bottom: 0.5rem;
+// }
+
 /*-- scss:defaults --*/
 
-@import 'https://fonts.googleapis.com/css2?family=Roboto:wght@300&display=swap';
+@import 'https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;700&display=swap';
 
 $font-family: "Roboto", sans-serif;
 $font-family-serif: "Roboto", sans-serif;
+$primary-color: #4CAF50; // Aesthetic green shade
+$secondary-color: #2C3E50; // Darker shade for contrast
+$background-light: #F8F9FA; // Light background color
+$border-radius: 8px;
 
 /*-- scss:rules --*/
+
+/* Enhanced keyboard key styling */
 kbd,
 .kbd {
-    background-color: #c4ffcf !important;
+    background-color: $primary-color !important;
+    color: white;
+    padding: 0.3rem 0.6rem;
+    border-radius: $border-radius;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+    font-weight: bold;
+    font-size: 0.9rem;
 }
 
+/* Stylish navbar */
 .navbar {
-    padding-top: 0.5rem;
-    padding-bottom: 0.5rem;
+    padding: 0.75rem 1.5rem;
+    background: linear-gradient(135deg, $primary-color, $secondary-color);
+    color: white;
+    font-weight: 400;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    border-bottom-left-radius: 12px;
+    border-bottom-right-radius: 12px;
+    transition: all 0.3s ease-in-out;
+
+    &:hover {
+        box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+    }
+}
+
+/* Responsive typography */
+body {
+    font-family: $font-family;
+    background-color: $background-light;
+    color: $secondary-color;
+    line-height: 1.6;
 }
