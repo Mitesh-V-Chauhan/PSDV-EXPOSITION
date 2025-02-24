@@ -54,28 +54,17 @@ body {
     }
 }
 
-/* Remove Blue Click Effect */
-a:focus, a:active {
-    color: $hover-text-color !important;
-    background: transparent !important;
-    outline: none !important;
-}
+/* Remove Default Link Styling */
+a {
+    color: inherit; /* Inherit text color */
+    text-decoration: none; /* Remove underline */
+    font-weight: 500;
+    transition: color $transition-speed ease-in-out;
 
-/* Fix Hover on Page Titles */
-h1, h2, h3 {
-    text-decoration: none !important;
-    color: $text-color !important;
-}
-
-h1:hover, h2:hover, h3:hover {
-    color: $text-color !important;
-}
-
-/* Main Content */
-.container {
-    max-width: 900px;
-    margin: auto;
-    padding: 2rem;
+    &:hover {
+        color: $hover-text-color;
+        text-decoration: none; /* Keep underline removed on hover */
+    }
 }
 
 /* Blog Post Grid Layout */
@@ -148,18 +137,6 @@ button, .btn {
     &:hover {
         background-color: $hover-text-color;
         box-shadow: 0 4px 10px rgba(139, 94, 59, 0.3);
-    }
-}
-
-/* Links */
-a {
-    color: $primary-color;
-    text-decoration: none;
-    font-weight: 500;
-
-    &:hover {
-        color: $hover-text-color;
-        text-decoration: underline;
     }
 }
 
