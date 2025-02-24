@@ -16,26 +16,22 @@
 //     padding-bottom: 0.5rem;
 // }
 
-/*-- scss:defaults --*/
-
 @import 'https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&family=Fira+Code:wght@400&display=swap';
 
 $font-family: "Poppins", sans-serif;
 $code-font: "Fira Code", monospace;
 
-/* Color Palette */
+/* 🎨 Color Palette */
 $background-color: #FAF3E0; /* Warm cream */
 $text-color: #3D2C1E; /* Dark brown */
 $primary-color: #A67C52; /* Soft brown */
 $secondary-color: #F5E6CC; /* Light beige for boxes */
-$hover-text-color: #8B5E3B; /* Rich brown for hover */
+$hover-text-color: #8B5E3B; /* Rich brown */
 $border-radius: 12px;
 $transition-speed: 0.3s;
 $box-shadow: 0 4px 12px rgba(125, 92, 60, 0.2);
 
-/*-- scss:rules --*/
-
-/* Global Page Styling */
+/* 🌍 Global Page Styling */
 body {
     font-family: $font-family;
     background-color: $background-color;
@@ -45,7 +41,7 @@ body {
     line-height: 1.75;
 }
 
-/* Navbar */
+/* 📌 Navbar */
 .navbar {
     padding: 1rem 2rem;
     background-color: $primary-color;
@@ -70,14 +66,14 @@ body {
     }
 }
 
-/* Fix: No Blue Click Effect */
+/* ✅ Fix: No Blue Click Effect */
 a:focus, a:active {
     color: $hover-text-color !important;
     background: transparent !important;
     outline: none !important;
 }
 
-/* Fix: Remove Hover from Page Titles */
+/* ✅ Fix: Remove Hover from Page Titles */
 h1, h2, h3 {
     text-decoration: none !important;
     color: $text-color !important;
@@ -87,14 +83,7 @@ h1:hover, h2:hover, h3:hover {
     color: $text-color !important;
 }
 
-/* Main Content */
-.container {
-    max-width: 900px;
-    margin: auto;
-    padding: 2rem;
-}
-
-/* 🔥 Blog Post Grid Layout */
+/* 📦 Blog Post Grid Layout */
 .listing {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
@@ -104,7 +93,7 @@ h1:hover, h2:hover, h3:hover {
 
 /* ✅ Blog Post Box Style */
 .listing .card, 
-.listing .quarto-listing-item {  /* Quarto automatically generates this */
+.listing .quarto-listing-item {
     background: $secondary-color;
     padding: 1.5rem;
     border-radius: $border-radius;
@@ -150,7 +139,14 @@ h1:hover, h2:hover, h3:hover {
     }
 }
 
-/* Buttons */
+/* ✅ Fix: Active Page is Brown (Not Blue) */
+.navbar .active, 
+.navbar a:active {
+    color: $hover-text-color !important;
+    font-weight: bold;
+}
+
+/* 🔘 Buttons */
 button, .btn {
     background-color: $primary-color;
     color: white;
@@ -167,7 +163,7 @@ button, .btn {
     }
 }
 
-/* Links */
+/* 🔗 Links */
 a {
     color: $primary-color;
     text-decoration: none;
@@ -175,11 +171,11 @@ a {
 
     &:hover {
         color: $hover-text-color;
-        text-decoration: underline;
+        text-decoration: none; /* ✅ No underline */
     }
 }
 
-/* Code Blocks */
+/* 📜 Code Blocks */
 pre {
     background-color: #4E3B31;
     color: #ffffff;
@@ -190,7 +186,7 @@ pre {
     box-shadow: $box-shadow;
 }
 
-/* Keyboard Key Styling */
+/* ⌨ Keyboard Key Styling */
 kbd {
     background-color: $primary-color;
     color: white;
@@ -205,7 +201,7 @@ kbd {
     }
 }
 
-/* Footer */
+/* 🔻 Footer */
 .footer {
     text-align: center;
     padding: 1rem;
@@ -216,7 +212,7 @@ kbd {
     border-top-right-radius: $border-radius;
 }
 
-/* Responsive Design */
+/* 📱 Responsive Design */
 @media (max-width: 768px) {
     .navbar {
         flex-direction: column;
