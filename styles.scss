@@ -23,49 +23,47 @@
 $font-family: "Poppins", sans-serif;
 $code-font: "Fira Code", monospace;
 
-$background-dark: #121212;
-$background-light: #ffffff;
-$text-dark: #eaeaea;
-$text-light: #333333;
-$primary-color: #2196F3;
-$secondary-color: #282c34;
-$border-radius: 10px;
+$background-color: #FAF3E0;
+$text-color: #3D2C1E;
+$primary-color: #A67C52;
+$secondary-color: #F5E6CC;
+$border-radius: 12px;
 $transition-speed: 0.3s;
+$box-shadow: 0 4px 12px rgba(125, 92, 60, 0.2);
 
 /*-- scss:rules --*/
 
 /* Global Page Styling */
 body {
     font-family: $font-family;
-    background-color: $background-dark;
-    color: $text-dark;
+    background-color: $background-color;
+    color: $text-color;
     margin: 0;
     padding: 0;
     line-height: 1.75;
 }
 
-/* Responsive Navbar */
+/* Navbar */
 .navbar {
     padding: 1rem 2rem;
-    background-color: $secondary-color;
-    color: $text-dark;
+    background-color: $primary-color;
+    color: white;
     display: flex;
     justify-content: space-between;
     align-items: center;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
     border-bottom-left-radius: $border-radius;
     border-bottom-right-radius: $border-radius;
-    transition: box-shadow $transition-speed ease-in-out;
+    box-shadow: $box-shadow;
 
     a {
-        color: $text-dark;
+        color: white;
         text-decoration: none;
         font-weight: 600;
         padding: 0.5rem 1rem;
-        transition: color $transition-speed ease-in-out;
+        transition: opacity $transition-speed ease-in-out;
 
         &:hover {
-            color: $primary-color;
+            opacity: 0.8;
         }
     }
 }
@@ -89,58 +87,60 @@ body {
     background: $secondary-color;
     padding: 1.5rem;
     border-radius: $border-radius;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
+    box-shadow: $box-shadow;
     transition: transform $transition-speed ease-in-out, box-shadow $transition-speed ease-in-out;
     cursor: pointer;
     border: 2px solid transparent;
+    text-align: left;
 
     &:hover {
         transform: translateY(-5px);
-        box-shadow: 0 6px 15px rgba(0, 0, 0, 0.25);
+        box-shadow: 0 6px 20px rgba(125, 92, 60, 0.25);
         border-color: $primary-color;
     }
 
     a {
         text-decoration: none;
         font-weight: bold;
-        color: $primary-color;
+        color: $text-color;
         display: block;
         font-size: 1.2rem;
+        margin-bottom: 0.5rem;
     }
 
     .date {
         font-size: 0.9rem;
-        color: #aaa;
+        color: #7D5C3C;
         margin-top: 0.5rem;
     }
 
     p {
         font-size: 0.95rem;
-        color: #ccc;
+        color: #5C3C2E;
         margin-top: 0.5rem;
     }
 }
 
 /* Code Blocks */
 pre {
-    background-color: #1e1e1e;
-    color: #fff;
+    background-color: #4E3B31;
+    color: #ffffff;
     padding: 1rem;
     border-radius: $border-radius;
     font-family: $code-font;
     overflow-x: auto;
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+    box-shadow: $box-shadow;
 }
 
 /* Keyboard Key Styling */
 kbd {
     background-color: $primary-color;
-    color: #fff;
+    color: white;
     padding: 0.3rem 0.6rem;
     border-radius: 5px;
     font-weight: bold;
     font-family: $code-font;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+    box-shadow: 0 2px 5px rgba(125, 92, 60, 0.2);
 }
 
 /* Responsive Design */
