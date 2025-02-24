@@ -1,6 +1,7 @@
 ---
 title: "Vega-Altair: A Declarative Statistical Visualization Library"
 ---
+<img src="media/image.png" alt="Altair Visualization Example" width="80%">
 
 ## Welcome to Vega-Altair Blog!  
 
@@ -13,7 +14,7 @@ You can visit our blog by clicking the **Blog** button in the top-right corner.
 
 ### **📷 Featured Image & 🎥 Introduction Video**
 <center>
-<img src="media/image.png" alt="Altair Visualization Example" width="80%">
+
 
 <video controls width="80%">
   <source src="media/WhatsApp Video 2025-02-23 at 23.24.45.mp4" type="video/mp4">
