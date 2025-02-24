@@ -86,6 +86,7 @@ body {
 }
 
 /* Blog Post Card - Standard Box Style */
+.listing .card, /* In case Quarto uses 'card' class */
 .post-item {
     background: $secondary-color;
     padding: 1.5rem;
