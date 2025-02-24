@@ -18,49 +18,79 @@
 
 /*-- scss:defaults --*/
 
-@import 'https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;700&display=swap';
+@import 'https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap';
 
-$font-family: "Roboto", sans-serif;
-$font-family-serif: "Roboto", sans-serif;
-$primary-color: #4CAF50; // Aesthetic green shade
-$secondary-color: #2C3E50; // Darker shade for contrast
-$background-light: #F8F9FA; // Light background color
-$border-radius: 8px;
+$font-family: "Poppins", sans-serif;
+$primary-color: #1E1E1E;  // Deep charcoal for a modern dark theme
+$secondary-color: #EAEAEA;  // Soft, premium white for contrast
+$accent-color: #8BC34A;  // Sophisticated muted green
+$border-radius: 10px;
+$transition-speed: 0.3s;
 
 /*-- scss:rules --*/
 
-/* Enhanced keyboard key styling */
-kbd,
-.kbd {
-    background-color: $primary-color !important;
-    color: white;
-    padding: 0.3rem 0.6rem;
-    border-radius: $border-radius;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
-    font-weight: bold;
-    font-size: 0.9rem;
+/* Modern & Luxurious Page Styling */
+body {
+    font-family: $font-family;
+    background-color: $primary-color;
+    color: $secondary-color;
+    margin: 0;
+    padding: 0;
+    line-height: 1.75;
 }
 
-/* Stylish navbar */
+/* Sleek Navbar */
 .navbar {
-    padding: 0.75rem 1.5rem;
-    background: linear-gradient(135deg, $primary-color, $secondary-color);
-    color: white;
+    padding: 1rem 2rem;
+    background-color: #222; // Elegant dark shade
+    color: $secondary-color;
     font-weight: 400;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    border-bottom-left-radius: 12px;
-    border-bottom-right-radius: 12px;
-    transition: all 0.3s ease-in-out;
+    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.2);
+    border-bottom-left-radius: $border-radius;
+    border-bottom-right-radius: $border-radius;
+    transition: box-shadow $transition-speed ease-in-out;
 
     &:hover {
-        box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+        box-shadow: 0 8px 20px rgba(0, 0, 0, 0.25);
     }
 }
 
-/* Responsive typography */
-body {
-    font-family: $font-family;
-    background-color: $background-light;
-    color: $secondary-color;
-    line-height: 1.6;
+/* Premium Keyboard Key Styling */
+kbd,
+.kbd {
+    background-color: $accent-color;
+    color: $primary-color;
+    padding: 0.4rem 0.8rem;
+    border-radius: $border-radius;
+    box-shadow: 0 3px 8px rgba(0, 0, 0, 0.25);
+    font-weight: 600;
+    font-size: 0.95rem;
+    text-transform: uppercase;
+    letter-spacing: 0.05rem;
+    transition: all $transition-speed ease-in-out;
+
+    &:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 5px 12px rgba(0, 0, 0, 0.3);
+    }
+}
+
+/* Buttons (Optional, for more aesthetic appeal) */
+button {
+    background-color: $accent-color;
+    color: $primary-color;
+    padding: 0.7rem 1.5rem;
+    border-radius: $border-radius;
+    border: none;
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+    transition: all $transition-speed ease-in-out;
+
+    &:hover {
+        background-color: darken($accent-color, 10%);
+        box-shadow: 0 6px 15px rgba(0, 0, 0, 0.25);
+        transform: translateY(-3px);
+    }
 }
