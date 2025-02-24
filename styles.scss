@@ -23,10 +23,13 @@
 $font-family: "Poppins", sans-serif;
 $code-font: "Fira Code", monospace;
 
-$background-color: #FAF3E0;
-$text-color: #3D2C1E;
-$primary-color: #A67C52;
-$secondary-color: #F5E6CC;
+/* Color Palette */
+$background-color: #FAF3E0; // Warm cream
+$text-color: #3D2C1E; // Dark brown (readable)
+$primary-color: #A67C52; // Soft brown (for navbar, buttons, hover)
+$secondary-color: #F5E6CC; // Lighter beige (for cards, highlights)
+$hover-color: #8B5E3B; // Rich brown (for hover states)
+$hover-bg-color: #DEC6A0; // Soft cream background on hover
 $border-radius: 12px;
 $transition-speed: 0.3s;
 $box-shadow: 0 4px 12px rgba(125, 92, 60, 0.2);
@@ -60,10 +63,11 @@ body {
         text-decoration: none;
         font-weight: 600;
         padding: 0.5rem 1rem;
-        transition: opacity $transition-speed ease-in-out;
+        transition: background-color $transition-speed ease-in-out;
 
         &:hover {
-            opacity: 0.8;
+            background-color: $hover-color;
+            border-radius: 8px;
         }
     }
 }
@@ -95,8 +99,9 @@ body {
 
     &:hover {
         transform: translateY(-5px);
-        box-shadow: 0 6px 20px rgba(125, 92, 60, 0.25);
-        border-color: $primary-color;
+        box-shadow: 0 6px 20px rgba(139, 94, 59, 0.3);
+        border-color: $hover-color;
+        background-color: $hover-bg-color;
     }
 
     a {
@@ -121,9 +126,38 @@ body {
     }
 }
 
+/* Buttons */
+button, .btn {
+    background-color: $primary-color;
+    color: white;
+    border: none;
+    padding: 0.75rem 1.5rem;
+    font-size: 1rem;
+    border-radius: $border-radius;
+    cursor: pointer;
+    transition: background-color $transition-speed ease-in-out, box-shadow $transition-speed ease-in-out;
+
+    &:hover {
+        background-color: $hover-color;
+        box-shadow: 0 4px 10px rgba(139, 94, 59, 0.3);
+    }
+}
+
+/* Links */
+a {
+    color: $hover-color;
+    text-decoration: none;
+    font-weight: 500;
+
+    &:hover {
+        color: $hover-color;
+        text-decoration: underline;
+    }
+}
+
 /* Code Blocks */
 pre {
-    background-color: #4E3B31;
+    background-color: #4E3B31;  // Dark brown background for code
     color: #ffffff;
     padding: 1rem;
     border-radius: $border-radius;
@@ -141,6 +175,21 @@ kbd {
     font-weight: bold;
     font-family: $code-font;
     box-shadow: 0 2px 5px rgba(125, 92, 60, 0.2);
+
+    &:hover {
+        background-color: $hover-color;
+    }
+}
+
+/* Footer */
+.footer {
+    text-align: center;
+    padding: 1rem;
+    background-color: $primary-color;
+    color: white;
+    margin-top: 2rem;
+    border-top-left-radius: $border-radius;
+    border-top-right-radius: $border-radius;
 }
 
 /* Responsive Design */
