@@ -209,7 +209,7 @@ main {
 /* Styling Links */
 a {
     color: $coffee-color; /* Change hyperlink color to coffee */
-    text-decoration: none; /* Remove underline */
+    text-decoration: underline; /* Remove underline */
 
     &:hover {
         color: darken($coffee-color, 10%);
@@ -219,6 +219,10 @@ a {
 
 /* Underline for Specific Links */
 a[href*="altair-viz.github.io"] {
+    text-decoration: underline; /* Force underline for Altair Documentation link */
+}
+
+a[href*="https://youtu.be/pM0GKncBzuA"] {
     text-decoration: underline; /* Force underline for Altair Documentation link */
 }
 
