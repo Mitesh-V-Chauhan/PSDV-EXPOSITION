@@ -2,6 +2,9 @@
 title: "Vega-Altair: A Declarative Statistical Visualization Library"
 ---
 <img src="media/image.png" alt="Altair Visualization Example" width="80%">
+<p style="font-size:12px; text-align:center; color:gray;">
+    Image Credit: <a href="https://altair-viz.github.io/" target="_blank">https://altair-viz.github.io/</a>
+</p>
 
 ## Welcome to Vega-Altair Blog!  
 
